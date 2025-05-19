@@ -53,7 +53,7 @@
                 dataType: 'json'
             })
                 .done(function (response) {
-                    $("#name").text("Nom : " + response.medium.name);
+                    $("#name").text("Nom : " + response.medium.denomination);
                     $("#description").text("Description : " + response.medium.description);
                     $("#type").text("Type : " + response.class);
                     if (response.class == "Spirite") {

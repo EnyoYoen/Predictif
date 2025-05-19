@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TP 3IF Ajax</title>
+    <meta name="author" content="Előd EGYED-ZSIGMOND">
+
+    <script type="text/javascript" src="partieJavascript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Espace consultation</h1>
+    <br />
+    <h2>Prochaine consultation</h2>
+    <br />
+    <span id="clientName"></span>
+    <br />
+    <span id="clientFirstName"></span>
+    <br />
+    <span id="clientBirthDay"></span>
+    <br />
+    <p>Profil Astral</p>
+    <ul id="clientProfile">
+
+    </ul>
+
+    <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour amour -->
+    Amour : <input type="radio" id="amour1" name="amour" value="1" checked><label for="amour1">1</label>
+    <input type="radio" id="amour2" name="amour" value="2"><label for="amour2">2</label>
+    <input type="radio" id="amour3" name="amour" value="3"><label for="amour3">3</label>
+    <input type="radio" id="amour4" name="amour" value="4"><label for="amour4">4</label>
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour Santé -->
+    Sante : <input type="radio" id="sante1" name="sante" value="1" checked><label for="sante1">1</label>
+    <input type="radio" id="sante2" name="sante" value="2"><label for="sante2">2</label>
+    <input type="radio" id="sante3" name="sante" value="3"><label for="sante3">3</label>
+    <input type="radio" id="sante4" name="sante" value="4"><label for="sante4">4</label>
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour Travail -->
+    Travail : <input type="radio" id="travail1" name="travail" value="1" checked><label for="travail1">1</label>
+    <input type="radio" id="travail2" name="travail" value="2"><label for="travail2">2</label>
+    <input type="radio" id="travail3" name="travail" value="3"><label for="travail3">3</label>
+    <input type="radio" id="travail4" name="travail" value="4"><label for="travail4">4</label>
+    <br />
+    <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
+    <br />
+
+    <h1>Statistiques</h1>
+    <p>Top 5 des mediums</p>
+    <ul id="mediumList">
+        <li></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var connected = false;
+
+        $(document).ready(function () {
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'infos_page_employee',
+                },
+                dataType: 'json'
+            })
+                .done(function (response) {
+
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+            $("#clientHistory").on("click", function () {
+                window.location = "clientHistoryMedium.html"
+            });
+            $("#predGen").on("click", function () {
+                let params = new URLSearchParams(window.location.search);
+                let idClient = params.get("idClient");
+                let amour = $("input[name='amour']:checked").val();
+                let sante = $("input[name='sante']:checked").val();
+                let travail = $("input[name='travail']:checked").val();
+
+                $.ajax({
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'prediction',
+                        idClient: idClient,
+                        amour: amour,
+                        sante: sante,
+                        travail: travail
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (response) {
+
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
+
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
