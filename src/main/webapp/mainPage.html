@@ -48,7 +48,7 @@
                 window.location = "History.html"
             });
             $.ajax({
-                url: './ActionServlet', // URL de l’ ActionServlet
+                url: './ActionServlet',
                 type: 'POST',
                 data: {
                     todo: 'accueil_connexion',
@@ -73,7 +73,7 @@
                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
                 });
             $.ajax({
-                url: './ActionServlet', // URL de l’ ActionServlet
+                url: './ActionServlet',
                 type: 'POST',
                 data: {
                     todo: 'accueil_liste_medium',
@@ -82,9 +82,16 @@
             })
                 .done(function (liste) {
                     let listeMediums = $("#mediumList");
-                    listeMediums.empty(); // Vider la liste avant d'ajouter les nouveaux éléments
+                    listeMediums.empty();
                     for (const medium of liste) {
-                        listeMediums.append("<li>" + medium.denomination + " : " + medium.description + "</li>");
+                        listeMediums.append("<li id=" + medium.id + ">" + medium.denomination + " : " + medium.description + "</li>");
+                        $("#" + medium.id).on("click", function () {
+                            if (connected) {
+                                window.location = "Medium.html?id=" + medium.id;
+                            } else {
+                                alert("Vous devez être connecté pour accéder à cette page.");
+                            }
+                        });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {

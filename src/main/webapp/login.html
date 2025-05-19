@@ -14,48 +14,47 @@
 
 <body>
     <h1>Connexion</h1>
-        <br />
-        Adresse mail : <input name="text" type="text" id="email" value="" />
-        <br /><br />
-        Mot de passe : <input name="text" type="text" id="mdp" value="" />
-        <br /><br />
-        <input name="Connexion" type="button" id="login" value="Connexion" />
-        <br /><br />
-        <input name="Inscription" type="button" id="signin" value="Inscription" />
-        <script>
-            $(document).ready(function () {
-                $("#login").on("click", function () {
-                    console.log("vkjfkvjbdfkvbdkf");
-                    $.ajax({
-                        url: './ActionServlet',
-                        type: 'POST',
-                        data: {
-                            todo: 'connexion',
-                            mail: $('#email').val(),
-                            password: $('#mdp').val()
-                        },
-                        dataType: 'json'
-                    })
-                        .done(function (response) {
-                            if (response.etat === "employe") {
-                                window.location = "register.html";
-                            }
-                            else if (response.etat === "client") {
-                                window.location = "home.html";
-                            }
-                            else {
+    <br />
+    Adresse mail : <input name="text" type="text" id="email" value="" />
+    <br /><br />
+    Mot de passe : <input name="text" type="text" id="mdp" value="" />
+    <br /><br />
+    <input name="Connexion" type="button" id="login" value="Connexion" />
+    <br /><br />
+    <input name="Inscription" type="button" id="signin" value="Inscription" />
+    <script>
+        $(document).ready(function () {
+            $("#login").on("click", function () {
+                $.ajax({
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'connexion',
+                        mail: $('#email').val(),
+                        password: $('#mdp').val()
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (response) {
+                        if (response.etat == "employe") {
+                            window.location = "employe.html";
+                        }
+                        else if (response.etat == "client") {
+                            window.location = "accueil.html";
+                        }
+                        else {
 
-                            }
-                        })
-                        .fail(function (error) {
-                            $("#login").text("ERREUR");
-                        });
-                });
-                $("#signin").on("click", function () {
-                    window.location = "signin.html";
-                });
+                        }
+                    })
+                    .fail(function (error) {
+                        $("#login").text("ERREUR");
+                    });
             });
-        </script>
+            $("#signin").on("click", function () {
+                window.location = "signin.html";
+            });
+        });
+    </script>
 
 </body>
 
