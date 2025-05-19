@@ -27,7 +27,7 @@ public class ConnexionAction extends Action {
         request.setAttribute("individu", ind);
 
         if (ind != null) {
-            request.getSession().setAttribute("mail", ind.getMail());
+            request.getSession().setAttribute("id", ind.getId());
             String type = ((ind instanceof Client) ? "client" : "employee");
             request.getSession().setAttribute("type", type);
         }

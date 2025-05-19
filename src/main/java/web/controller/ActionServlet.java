@@ -15,9 +15,11 @@ import metier.service.Service;
 import web.model.AccueilConnexionAction;
 import web.model.AccueilListeMediumAction;
 import web.model.ConnexionAction;
+import web.model.CurrentConsultationAction;
 import web.model.InfosMediumAction;
 import web.model.InscriptionAction;
 import web.vue.ConnexionSerialisation;
+import web.vue.CurrentConsultationSerialisation;
 import web.vue.MediumSerialisation;
 import web.vue.IndividuSerialisation;
 
@@ -48,6 +50,10 @@ public class ActionServlet extends HttpServlet {
             case "infos_medium":
                 new InfosMediumAction(service).execute(req);
                 new MediumSerialisation().apply(req, res);
+                break;
+            case "infos_page_employee":
+                new CurrentConsultationAction(service).execute(req);
+                new CurrentConsultationSerialisation().apply(req, res);
                 break;
             case "connexion":
                 new ConnexionAction(service).execute(req);
