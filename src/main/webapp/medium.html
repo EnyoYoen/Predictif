@@ -15,11 +15,15 @@
 <body>
     <h1>Informations sur le medium</h1>
     <br />
-    <span id="name">Nom : </span>
+    <span id="name"></span>
     <br />
-    <span id="description">Description : </span>
+    <span id="description"></span>
     <br />
     <span id="type"></span>
+    <br />
+    <span id="info1"></span>
+    <br />
+    <span id="info2"></span>
     <br />
     <input name="Retour" type="button" id="return" value="Retour" />
 
@@ -33,57 +37,29 @@
 
 
     <script>
-        var connected = false;
         $(document).ready(function () {
             $("#return").on("click", function () {
                 window.location = "mainPage.html"
             });
             $.ajax({
                 url: './ActionServlet',
-                type: 'POST',
+                type: 'GET',
                 data: {
-                    todo: 'accueil_connexion',
+                    todo: 'infos_medium',
                     id: getUrlParameter('id')
                 },
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.type == "employee") {
-                        window.location = "employee.html"
-                    } else if (response.connected == "false") {
-                        $("#signin").show();
-                        $("#login").show();
-                        $("#history").hide();
-                    } else if (response.connected == "true") {
-                        $("#signin").hide();
-                        $("#login").hide();
-                        $("#history").show();
-                        connected = true;
+                    $("#name").text("Nom : " + response.medium.name);
+                    $("#description").text("Description : " + response.medium.description);
+                    $("#type").text("Type : " + response.class);
+                    if (response.class == "Spirite") {
+                        $("#info1").text(response.medium.support);
                     }
-                })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                });
-            $.ajax({
-                url: './ActionServlet',
-                type: 'POST',
-                data: {
-                    todo: 'accueil_liste_medium',
-                },
-                dataType: 'json'
-            })
-                .done(function (liste) {
-                    let listeMediums = $("#mediumList");
-                    listeMediums.empty();
-                    for (const medium of liste) {
-                        listeMediums.append("<li id=" + medium.id + ">" + medium.denomination + " : " + medium.description + "</li>");
-                        $("#" + medium.id).on("click", function () {
-                            if (connected) {
-                                window.location = "medium.html?id=" + medium.id;
-                            } else {
-                                alert("Vous devez être connecté pour accéder à cette page.");
-                            }
-                        });
+                    else if (response.class == "Astrologue") {
+                        $("#info1").text(response.medium.formation);
+                        $("#info2").text(response.medium.promotion);
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
