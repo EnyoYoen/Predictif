@@ -46,7 +46,7 @@ public class InscriptionAction extends Action {
         Client client = service.enregisterClient(new Client(address, date, lastname, firstname, phone, genre, password, mail));
         request.setAttribute("client", client);
         if (client != null) {
-            request.getSession().setAttribute("mail", client.getMail());
+            request.getSession().setAttribute("id", client.getId());
             request.getSession().setAttribute("type", "client");
         }
     }

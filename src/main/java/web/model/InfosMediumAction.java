@@ -23,7 +23,7 @@ public class InfosMediumAction extends Action {
         String id = request.getParameter("id");
         Medium medium = null;
         if (id != null) {
-            medium = Service.findMediumById();
+            medium = service.findMediumById(Long.parseLong(id));
         } else {
             medium = null;
         }
