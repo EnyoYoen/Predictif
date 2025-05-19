@@ -27,19 +27,13 @@ public class ConnexionSerialisation {
         } catch (IOException e) {
             return;
         }
-        
+
         Map<String, Object> data;
-        
+
         if (request.getAttribute("connected") != null && request.getAttribute("type") != null) {
             data = new HashMap<>();
             data.put("connected", request.getAttribute("connected"));
             data.put("type", request.getAttribute("type"));
-
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            String json = gson.toJson(data);
-
-            out.println(json);
         } else {
             data = new HashMap<>();
             data.put("connected", false);

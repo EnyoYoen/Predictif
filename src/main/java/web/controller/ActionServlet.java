@@ -7,7 +7,6 @@ package web.controller;
 
 import dao.JpaUtil;
 import javax.servlet.ServletException;
-import web.model.ConnexionAction;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
