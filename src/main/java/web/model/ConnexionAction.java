@@ -25,10 +25,11 @@ public class ConnexionAction extends Action {
         String mail = request.getParameter("mail");
         Individu ind = service.verifiermdpIndividu(mail, password);
         request.setAttribute("individu", ind);
-        
+
         if (ind != null) {
             request.getSession().setAttribute("mail", ind.getMail());
-            request.getSession().setAttribute("type", ((ind instanceof Client) ? "client" : "employee"));
+            String type = ((ind instanceof Client) ? "client" : "employee");
+            request.getSession().setAttribute("type", type);
         }
     }
 }

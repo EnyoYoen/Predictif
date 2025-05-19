@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ypeyrot
  */
-public class ConnexionSerialisation {
+public class ListeMediumSerialisation {
 
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
@@ -28,21 +28,9 @@ public class ConnexionSerialisation {
             return;
         }
 
-        Map<String, Object> data;
-
-        if (request.getAttribute("connected") != null && request.getAttribute("type") != null) {
-            data = new HashMap<>();
-            data.put("connected", request.getAttribute("connected"));
-            data.put("type", request.getAttribute("type"));
-        } else {
-            data = new HashMap<>();
-            data.put("connected", false);
-            data.put("type", null);
-        }
-
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(data);
+        String json = gson.toJson(request.getAttribute("listeMedium"));
 
         out.println(json);
 
