@@ -48,7 +48,7 @@
                 window.location = "History.html"
             });
             $.ajax({
-                url: './ActionServlet', // URL de l’ ActionServlet
+                url: './ActionServlet',
                 type: 'POST',
                 data: {
                     todo: 'accueil_connexion',
@@ -73,7 +73,7 @@
                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
                 });
             $.ajax({
-                url: './ActionServlet', // URL de l’ ActionServlet
+                url: './ActionServlet',
                 type: 'POST',
                 data: {
                     todo: 'accueil_liste_medium',
@@ -82,7 +82,7 @@
             })
                 .done(function (liste) {
                     let listeMediums = $("#mediumList");
-                    listeMediums.empty(); // Vider la liste avant d'ajouter les nouveaux éléments
+                    listeMediums.empty();
                     for (const medium of liste) {
                         listeMediums.append("<li>" + medium.denomination + " : " + medium.description + "</li>");
                     }
