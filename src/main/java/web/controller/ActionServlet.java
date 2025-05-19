@@ -18,10 +18,13 @@ import web.model.ConnexionAction;
 import web.model.CurrentConsultationAction;
 import web.model.InfosMediumAction;
 import web.model.InscriptionAction;
+import web.model.PredictionAction;
 import web.vue.ConnexionSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.MediumSerialisation;
 import web.vue.IndividuSerialisation;
+import web.vue.ListeMediumSerialisation;
+import web.vue.PredictionSerialisation;
 
 /**
  *
@@ -37,7 +40,7 @@ public class ActionServlet extends HttpServlet {
             return;
         }
         Service service = new Service();
-        service.initialisationBD();
+        //service.initialisationBD();
         switch (todo) {
             case "accueil_connexion":
                 new AccueilConnexionAction(service).execute(req);
@@ -45,7 +48,7 @@ public class ActionServlet extends HttpServlet {
                 break;
             case "accueil_liste_medium":
                 new AccueilListeMediumAction(service).execute(req);
-                new MediumSerialisation().apply(req, res);
+                new ListeMediumSerialisation().apply(req, res);
                 break;
             case "infos_medium":
                 new InfosMediumAction(service).execute(req);
@@ -54,6 +57,10 @@ public class ActionServlet extends HttpServlet {
             case "infos_page_employee":
                 new CurrentConsultationAction(service).execute(req);
                 new CurrentConsultationSerialisation().apply(req, res);
+                break;
+            case "prediction":
+                new PredictionAction(service).execute(req);
+                new PredictionSerialisation().apply(req, res);
                 break;
             case "connexion":
                 new ConnexionAction(service).execute(req);

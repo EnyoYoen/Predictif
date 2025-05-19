@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metier.modele.Astrologue;
+import metier.modele.Employe;
+import metier.modele.Individu;
 import metier.modele.Medium;
 import metier.modele.Spirite;
 
@@ -21,7 +23,7 @@ import metier.modele.Spirite;
  *
  * @author ypeyrot
  */
-public class MediumSerialisation {
+public class PredictionSerialisation {
 
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
@@ -31,21 +33,13 @@ public class MediumSerialisation {
             return;
         }
         response.setContentType("application/json;charset=UTF-8");
-
+        
         Map<String, Object> data;
 
         data = new HashMap<>();
-        Medium medium = (Medium) request.getAttribute("medium");
-        data.put("medium", medium);
-        String type;
-        if (medium instanceof Spirite) {
-            type = "Spirite";
-        } else if (medium instanceof Astrologue) {
-            type = "Astrologue";
-        } else {
-            type = "Cartomancien";
-        }
-        data.put("class", type);
+        data.put("predi_love", request.getAttribute("predi_love"));
+        data.put("predi_health", request.getAttribute("predi_health"));
+        data.put("predi_work", request.getAttribute("predi_work"));
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();

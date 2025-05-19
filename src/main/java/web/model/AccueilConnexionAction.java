@@ -20,6 +20,6 @@ public class AccueilConnexionAction extends Action {
 
     public void execute(HttpServletRequest request) {
         request.setAttribute("connected", request.getSession().getAttribute("mail") != null);
-        request.setAttribute("type", request.getSession());
+        request.setAttribute("type", request.getSession().getAttribute("type"));
     }
 }
