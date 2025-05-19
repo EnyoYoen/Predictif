@@ -1,6 +1,9 @@
 package web.model;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import metier.modele.Client;
+import metier.service.Service;
 
 public class ListeClientsContenantAction extends Action {
     public ListeClientsContenantAction(Service service) {

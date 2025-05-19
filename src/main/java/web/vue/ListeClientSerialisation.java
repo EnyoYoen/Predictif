@@ -1,8 +1,14 @@
 package web.vue;
 
-public class ListeClientSerialisation extends Serialisation {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    @Override
+public class ListeClientSerialisation {
+
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

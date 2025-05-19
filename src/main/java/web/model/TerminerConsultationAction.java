@@ -1,6 +1,8 @@
 package web.model;
 
+import javax.servlet.http.HttpServletRequest;
 import metier.modele.Consultation;
+import metier.service.Service;
 
 public class TerminerConsultationAction extends Action {
     public TerminerConsultationAction(Service service) {
@@ -11,7 +13,12 @@ public class TerminerConsultationAction extends Action {
     public void execute(HttpServletRequest request) {
         String consultationId = request.getParameter("consultationId");
         String commentaire = request.getParameter("commentaire");
-        Consultation consultation = service.findConsultationById(consultationId);
-        service.terminerConsultation(consultation, commentaire);
+        try {
+            
+        } catch (Exception e) {
+            Long id = Long.parseLong(consultationId);
+            Consultation consultation = service.findConsultationById(id);
+            service.validerConsultation(consultation, commentaire);
+        }
     }
 }

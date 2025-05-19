@@ -14,17 +14,31 @@ import javax.servlet.http.HttpServletResponse;
 import metier.service.Service;
 import web.model.AccueilConnexionAction;
 import web.model.AccueilListeMediumAction;
+import web.model.CommencerConsultationAction;
 import web.model.ConnexionAction;
 import web.model.CurrentConsultationAction;
+import web.model.HistoriqueClientAction;
 import web.model.InfosMediumAction;
 import web.model.InscriptionAction;
+import web.model.ListeClientsContenantAction;
+import web.model.ListeMediumOrdonneeAction;
 import web.model.PredictionAction;
+import web.model.PrendreRendezvousAction;
+import web.model.RepartitionClientAction;
+import web.model.RepartitionEmployeAction;
+import web.model.TerminerConsultationAction;
+import web.model.TopMediumAction;
 import web.vue.ConnexionSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.MediumSerialisation;
 import web.vue.IndividuSerialisation;
+import web.vue.ListeClientSerialisation;
+import web.vue.ListeConsultationSerialisation;
 import web.vue.ListeMediumSerialisation;
 import web.vue.PredictionSerialisation;
+import web.vue.PrendreRendezvousSerialisation;
+import web.vue.RepartitionClientSerialisation;
+import web.vue.RepartitionEmployeSerialisation;
 
 /**
  *
@@ -64,7 +78,7 @@ public class ActionServlet extends HttpServlet {
                 break;
             case "historique_client":
                 new HistoriqueClientAction(service).execute(req);
-                new ListeConsulationSerialisation().apply(req, res);
+                new ListeConsultationSerialisation().apply(req, res);
                 break;
             case "top_medium":
                 new TopMediumAction(service).execute(req);
@@ -80,10 +94,10 @@ public class ActionServlet extends HttpServlet {
             case "terminer_consultation":
                 new TerminerConsultationAction(service).execute(req);
                 break;
-            case "liste_clients":
+            /*case "liste_clients":
                 new ListeClientsAction(service).execute(req);
                 new ListeClientSerialisation().apply(req, res);
-                break;
+                break;*/
             case "repartition_employe":
                 new RepartitionEmployeAction(service).execute(req);
                 new RepartitionEmployeSerialisation().apply(req, res);

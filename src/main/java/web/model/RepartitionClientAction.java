@@ -1,6 +1,8 @@
 package web.model;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import metier.service.Service;
 
 import com.google.maps.model.LatLng;
 
