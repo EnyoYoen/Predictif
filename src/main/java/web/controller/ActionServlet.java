@@ -62,6 +62,44 @@ public class ActionServlet extends HttpServlet {
                 new PredictionAction(service).execute(req);
                 new PredictionSerialisation().apply(req, res);
                 break;
+            case "historique_client":
+                new HistoriqueClientAction(service).execute(req);
+                new ListeConsulationSerialisation().apply(req, res);
+                break;
+            case "top_medium":
+                new TopMediumAction(service).execute(req);
+                new ListeMediumSerialisation().apply(req, res);
+                break;
+            case "liste_clients_contenant":
+                new ListeClientsContenantAction(service).execute(req);
+                new ListeClientSerialisation().apply(req, res);
+                break;
+            case "commencer_consultation":
+                new CommencerConsultationAction(service).execute(req);
+                break;
+            case "terminer_consultation":
+                new TerminerConsultationAction(service).execute(req);
+                break;
+            case "liste_clients":
+                new ListeClientsAction(service).execute(req);
+                new ListeClientSerialisation().apply(req, res);
+                break;
+            case "repartition_employe":
+                new RepartitionEmployeAction(service).execute(req);
+                new RepartitionEmployeSerialisation().apply(req, res);
+                break;
+            case "repartition_client":
+                new RepartitionClientAction(service).execute(req);
+                new RepartitionClientSerialisation().apply(req, res);
+                break;
+            case "liste_medium_ordonnee":
+                new ListeMediumOrdonneeAction(service).execute(req);
+                new ListeMediumSerialisation().apply(req, res);
+                break;
+            case "prendre_rendez_vous":
+                new PrendreRendezvousAction(service).execute(req);
+                new PrendreRendezvousSerialisation().apply(req, res);
+                break;
             case "connexion":
                 new ConnexionAction(service).execute(req);
                 new IndividuSerialisation().apply(req, res);
