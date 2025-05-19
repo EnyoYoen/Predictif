@@ -84,7 +84,7 @@
                     let listeMediums = $("#mediumList");
                     listeMediums.empty(); // Vider la liste avant d'ajouter les nouveaux éléments
                     for (const medium of liste) {
-                        listeMediums.append("<li>" + medium.nom + "</li>");
+                        listeMediums.append("<li>" + medium.denomination + " : " + medium.description + "</li>");
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
