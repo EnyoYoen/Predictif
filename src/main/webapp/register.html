@@ -14,50 +14,78 @@
 
 <body>
     <h1>Inscription</h1>
-    <p>
-        <br />
-        Adresse mail : <input name="text" type="text" id="email" value="" />
-        <br /><br />
-        <span id="mdpcolor" style="color: black"> Mot de passe : </span> <input name="text" type="text" id="mdp"
-            value="" />
-        <br /><br />
-        Confirmation du mot de passe : <input name="text" type="text" id="cmdp" value="" />
-        <br /><br />
-        Nom : <input name="text" type="text" id="lastname" value="" />
-        <br /><br />
-        Prenom : <input name="text" type="text" id="firstname" value="" />
-        <br /><br />
-        Telephone : <input name="text" type="text" id="phone" value="" />
-        <br /><br />
-        Adresse : <input name="text" type="text" id="address" value="" />
-        <br /><br />
-        <input name="Inscription" type="button" id="signin" value="Inscription" />
-        <script>
-            $(document).ready(function () {
-                $("#signin").on("click", function () {
-                    if (document.getElementById('mdp').value == document.getElementById('cmdp').value) {
-                        $.ajax({
-                            url: './ActionServlet',
-                            type: 'POST',
-                            data: {
-                                todo: 'inscription',
-                                mail: $('#email').val(),
-                                password: $('#mdp').val(),
-                                lastname: $('lastname').val(),
-                                firstname: $('firstname').val(),
-                                phone: $('phone').val(),
-                                address: $('address').val()
-                            },
-                            dataType: 'json'
-                        });
-                    }
-                    else {
-                        document.getElementById('mdpcolor').style = "color: red";
-                    }
+    <br />
+    Adresse mail : <input name="text" type="text" id="email" value="" />
+    <br /><br />
+    <span id="mdpcolor" style="color: black">Mot de passe : </span> <input name="text" type="text" id="mdp" value="" />
+    <br /><br />
+    Confirmation du mot de passe : <input name="text" type="text" id="cmdp" value="" />
+    <br /><br />
+    Nom : <input name="text" type="text" id="lastname" value="" />
+    <br /><br />
+    Prenom : <input name="text" type="text" id="firstname" value="" />
+    <br /><br />
+    Telephone : <input name="text" type="text" id="phone" value="" />
+    <br /><br />
+    Adresse : <input name="text" type="text" id="address" value="" />
+    <br /><br />
+    Date de naissance : <input type="date" id="birthday" name="birthday">
+    <br /><br />
+    Genre : <input type="radio" id="man" name="genre" value=1 checked><label for="man">Homme</label>
+    <input type="radio" id="woman" name="genre" value=2><label for="woman">Femme</label>
+    <br /><br />
+    <span id="fill_fields" style="color: red"></span>
 
-                });
+
+    <input name="Inscription" type="button" id="signin" value="Inscription" />
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#signin").on("click", function () {
+                if (document.getElementById('mdp').value == document.getElementById('cmdp').value && document.getElementById('mdp').value != "" && document.getElementById('birthday').value != "" && document.getElementById('lastname').value != "" && document.getElementById('firstname').value != "" && document.getElementById('phone').value != "" && document.getElementById('address').value != "") {
+                    $.ajax({
+                        url: './ActionServlet',
+                        type: 'POST',
+                        data: {
+                            todo: 'inscription',
+                            mail: $('#email').val(),
+                            password: $('#mdp').val(),
+                            lastname: $('#lastname').val(),
+                            firstname: $('#firstname').val(),
+                            phone: $('#phone').val(),
+                            address: $('#address').val(),
+                            birthday: $('#birthday').val(),
+                            radio: $('input[type=radio][name=genre]:checked').val()
+                        },
+                        dataType: 'json'
+                    })
+                        .done(function (response) {
+                            if (response.succes == "true") {
+                                window.location = "index.html";
+                            }
+                            else if (response.succes == "false") {
+                                $("#fill_fields").text("Erreur d'inscription");
+                            }
+                            else {
+                                $("#fill_fields").text("Erreur d'inscription");
+                            }
+                        })
+                        .fail(function (error) {
+                            $("#signin").text("ERREUR");
+                            $("#fill_fields").text("Erreur d'inscription");
+                        });
+                }
+                else {
+                    document.getElementById('mdpcolor').style = "color: red";
+                    $("#fill_fields").text("Remplir tous les champs");
+                }
+
             });
-        </script>
+        });
+    </script>
 
 </body>
 

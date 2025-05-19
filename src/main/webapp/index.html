@@ -39,13 +39,13 @@
         var connected = false;
         $(document).ready(function () {
             $("#signin").on("click", function () {
-                window.location = "Signin.html"
+                window.location = "register.html"
             });
             $("#login").on("click", function () {
-                window.location = "Login.html"
+                window.location = "connect.html"
             });
             $("#history").on("click", function () {
-                window.location = "History.html"
+                window.location = "history.html"
             });
             $.ajax({
                 url: './ActionServlet',
@@ -57,7 +57,7 @@
             })
                 .done(function (response) {
                     if (response.type == "employee") {
-                        window.location = "Employee.html"
+                        window.location = "employee.html"
                     } else if (response.connected == "false") {
                         $("#signin").show();
                         $("#login").show();
@@ -87,7 +87,7 @@
                         listeMediums.append("<li id=" + medium.id + ">" + medium.denomination + " : " + medium.description + "</li>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "Medium.html?id=" + medium.id;
+                                window.location = "medium.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
