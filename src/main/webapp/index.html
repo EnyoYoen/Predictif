@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TP 3IF Ajax</title>
+    <meta name="author" content="Előd EGYED-ZSIGMOND">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Connexion</h1>
+        <br />
+        Adresse mail : <input name="text" type="text" id="email" value="" />
+        <br /><br />
+        Mot de passe : <input name="text" type="text" id="mdp" value="" />
+        <br /><br />
+        <input name="Connexion" type="button" id="login" value="Connexion" />
+        <br /><br />
+        <input name="Inscription" type="button" id="signin" value="Inscription" />
+        <script>
+            $(document).ready(function () {
+                $("#login").on("click", function () {
+                    console.log("vkjfkvjbdfkvbdkf");
+                    $.ajax({
+                        url: './ActionServlet',
+                        type: 'POST',
+                        data: {
+                            todo: 'connexion',
+                            mail: $('#email').val(),
+                            password: $('#mdp').val()
+                        },
+                        dataType: 'json'
+                    })
+                        .done(function (response) {
+                            if (response.etat === "employe") {
+                                window.location = "register.html";
+                            }
+                            else if (response.etat === "client") {
+                                window.location = "home.html";
+                            }
+                            else {
+
+                            }
+                        })
+                        .fail(function (error) {
+                            $("#login").text("ERREUR");
+                        });
+                });
+                $("#signin").on("click", function () {
+                    window.location = "signin.html";
+                });
+            });
+        </script>
+
+</body>
+
+</html>
