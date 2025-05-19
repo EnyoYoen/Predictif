@@ -13,18 +13,15 @@
 </head>
 
 <body>
-    <h1>Predictif</h1>
+    <h1>Informations sur le medium</h1>
     <br />
-    <input name="Inscription" type="button" id="signin" value="Inscription" />
+    <span id="name">Nom : </span>
     <br />
-    <input name="Connexion" type="button" id="login" value="Connexion" />
+    <span id="description">Description : </span>
     <br />
-    <input name="Historique" type="button" id="history" value="Historique" />
+    <span id="type"></span>
     <br />
-    <p>Listes mediums</p>
-    <ul id="mediumList">
-        <li></li>
-    </ul>
+    <input name="Retour" type="button" id="return" value="Retour" />
 
 
 
@@ -38,26 +35,21 @@
     <script>
         var connected = false;
         $(document).ready(function () {
-            $("#signin").on("click", function () {
-                window.location = "Signin.html"
-            });
-            $("#login").on("click", function () {
-                window.location = "Login.html"
-            });
-            $("#history").on("click", function () {
-                window.location = "History.html"
+            $("#return").on("click", function () {
+                window.location = "mainPage.html"
             });
             $.ajax({
                 url: './ActionServlet',
                 type: 'POST',
                 data: {
                     todo: 'accueil_connexion',
+                    id: getUrlParameter('id')
                 },
                 dataType: 'json'
             })
                 .done(function (response) {
                     if (response.type == "employee") {
-                        window.location = "Employee.html"
+                        window.location = "employee.html"
                     } else if (response.connected == "false") {
                         $("#signin").show();
                         $("#login").show();
@@ -87,7 +79,7 @@
                         listeMediums.append("<li id=" + medium.id + ">" + medium.denomination + " : " + medium.description + "</li>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "Medium.html?id=" + medium.id;
+                                window.location = "medium.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }

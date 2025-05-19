@@ -7,54 +7,98 @@
     <title>TP 3IF Ajax</title>
     <meta name="author" content="Előd EGYED-ZSIGMOND">
 
+    <script type="text/javascript" src="partieJavascript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
-    <h1>Connexion</h1>
-        <br />
-        Adresse mail : <input name="text" type="text" id="email" value="" />
-        <br /><br />
-        Mot de passe : <input name="text" type="text" id="mdp" value="" />
-        <br /><br />
-        <input name="Connexion" type="button" id="login" value="Connexion" />
-        <br /><br />
-        <input name="Inscription" type="button" id="signin" value="Inscription" />
-        <script>
-            $(document).ready(function () {
-                $("#login").on("click", function () {
-                    console.log("vkjfkvjbdfkvbdkf");
-                    $.ajax({
-                        url: './ActionServlet',
-                        type: 'POST',
-                        data: {
-                            todo: 'connexion',
-                            mail: $('#email').val(),
-                            password: $('#mdp').val()
-                        },
-                        dataType: 'json'
-                    })
-                        .done(function (response) {
-                            if (response.etat === "employe") {
-                                window.location = "register.html";
-                            }
-                            else if (response.etat === "client") {
-                                window.location = "home.html";
-                            }
-                            else {
+    <h1>Predictif</h1>
+    <br />
+    <input name="Inscription" type="button" id="signin" value="Inscription" />
+    <br />
+    <input name="Connexion" type="button" id="login" value="Connexion" />
+    <br />
+    <input name="Historique" type="button" id="history" value="Historique" />
+    <br />
+    <p>Listes mediums</p>
+    <ul id="mediumList">
+        <li></li>
+    </ul>
 
-                            }
-                        })
-                        .fail(function (error) {
-                            $("#login").text("ERREUR");
-                        });
-                });
-                $("#signin").on("click", function () {
-                    window.location = "signin.html";
-                });
+
+
+
+
+
+
+
+
+
+    <script>
+        var connected = false;
+        $(document).ready(function () {
+            $("#signin").on("click", function () {
+                window.location = "register.html"
             });
-        </script>
+            $("#login").on("click", function () {
+                window.location = "connect.html"
+            });
+            $("#history").on("click", function () {
+                window.location = "history.html"
+            });
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'accueil_connexion',
+                },
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    if (response.type == "employee") {
+                        window.location = "employee.html"
+                    } else if (response.connected == "false") {
+                        $("#signin").show();
+                        $("#login").show();
+                        $("#history").hide();
+                    } else if (response.connected == "true") {
+                        $("#signin").hide();
+                        $("#login").hide();
+                        $("#history").show();
+                        connected = true;
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'accueil_liste_medium',
+                },
+                dataType: 'json'
+            })
+                .done(function (liste) {
+                    let listeMediums = $("#mediumList");
+                    listeMediums.empty();
+                    for (const medium of liste) {
+                        listeMediums.append("<li id=" + medium.id + ">" + medium.denomination + " : " + medium.description + "</li>");
+                        $("#" + medium.id).on("click", function () {
+                            if (connected) {
+                                window.location = "medium.html?id=" + medium.id;
+                            } else {
+                                alert("Vous devez être connecté pour accéder à cette page.");
+                            }
+                        });
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+        });
+    </script>
 
 </body>
 
