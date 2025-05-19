@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metier.service.Service;
+import web.model.AccueilConnexionAction;
+import web.model.AccueilListeMediumAction;
+import web.model.ConnexionAction;
 import web.model.InscriptionAction;
+import web.vue.ConnexionSerialisation;
+import web.vue.ListeMediumSerialisation;
 import web.vue.IndividuSerialisation;
 
 /**
@@ -32,6 +37,14 @@ public class ActionServlet extends HttpServlet {
         Service service = new Service();
         service.initialisationBD();
         switch (todo) {
+            case "accueil_connexion":
+                new AccueilConnexionAction(service).execute(req);
+                new ConnexionSerialisation().apply(req, res);
+                break;
+            case "accueil_liste_medium":
+                new AccueilListeMediumAction(service).execute(req);
+                new ListeMediumSerialisation().apply(req, res);
+                break;
             case "connexion":
                 new ConnexionAction(service).execute(req);
                 new IndividuSerialisation().apply(req, res);
