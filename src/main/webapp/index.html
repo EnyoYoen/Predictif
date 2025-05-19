@@ -37,6 +37,7 @@
 
     <script>
         var connected = false;
+        let params = new URLSearchParams(window.location.search);
         $(document).ready(function () {
             $("#signin").on("click", function () {
                 window.location = "register.html"

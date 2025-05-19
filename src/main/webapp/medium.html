@@ -37,6 +37,8 @@
 
 
     <script>
+        let params = new URLSearchParams(window.location.search);
+        let idMedium = params.get("id");
         $(document).ready(function () {
             $("#return").on("click", function () {
                 window.location = "mainPage.html"
@@ -46,7 +48,7 @@
                 type: 'GET',
                 data: {
                     todo: 'infos_medium',
-                    id: getUrlParameter('id')
+                    id: idMedium
                 },
                 dataType: 'json'
             })
