@@ -28,6 +28,7 @@ import web.model.RepartitionClientAction;
 import web.model.RepartitionEmployeAction;
 import web.model.TerminerConsultationAction;
 import web.model.TopMediumAction;
+import web.vue.ClientSerialisation;
 import web.vue.ConnexionSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.MediumSerialisation;
@@ -120,6 +121,7 @@ public class ActionServlet extends HttpServlet {
                 break;
             case "inscription":
                 new InscriptionAction(service).execute(req);
+                new ClientSerialisation().apply(req, res);
                 break;
             default:
                 break;

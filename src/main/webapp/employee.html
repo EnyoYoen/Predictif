@@ -7,7 +7,6 @@
     <title>TP 3IF Ajax</title>
     <meta name="author" content="Előd EGYED-ZSIGMOND">
 
-    <script type="text/javascript" src="partieJavascript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -50,13 +49,32 @@
     <br />
     <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
     <br />
+    <input name="ready" type="button" id="ready" value="Prêt" />
+    <br />
+    <input name="end" type="button" id="end" value="Terminer" />
 
     <h1>Statistiques</h1>
     <p>Top 5 des mediums</p>
-    <ul id="mediumList">
+    <ul id="medium-list">
         <li></li>
     </ul>
 
+    <input name="Voir plus" type="button" id="see-more" value="Voir plus" />
+
+    <p>Répartition des clients par employé</p>
+    <p>Rechercher par nom</p>
+    <input type="text" id="search" />
+    <input name="search" type="button" id="searchButton" value="Rechercher" />
+
+    <ul id="search-results">
+        <li></li>
+    </ul>
+
+    <input name="map" type="button" id="map" value="Carte des clients" />
+    <br />
+
+    <input name="return" type="button" id="return" value="Retour" />
+    <br />
 
 
 
@@ -68,6 +86,7 @@
 
     <script>
         var connected = false;
+        var idClient = 52;
 
         $(document).ready(function () {
             $.ajax({
@@ -79,7 +98,38 @@
                 dataType: 'json'
             })
                 .done(function (response) {
-
+                    let client = response.client;
+                    let consultation = response.consultation;
+                    let medium = response.medium;
+                    if (client != null) {
+                        idClient = client.id;
+                    }
+                    connected = response.connected;
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'top_medium',
+                },
+                dataType: 'json'
+            })
+                .done(function (liste) {
+                    let listeMediums = $("#medium-list");
+                    listeMediums.empty();
+                    for (const medium of liste) {
+                        listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
+                        $("#" + medium.id).on("click", function () {
+                            if (connected) {
+                                window.location = "medium.html?id=" + medium.id;
+                            } else {
+                                alert("Vous devez être connecté pour accéder à cette page.");
+                            }
+                        });
+                    }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -88,21 +138,15 @@
                 window.location = "clientHistoryMedium.html"
             });
             $("#predGen").on("click", function () {
-                let params = new URLSearchParams(window.location.search);
-                let idClient = params.get("idClient");
-                let amour = $("input[name='amour']:checked").val();
-                let sante = $("input[name='sante']:checked").val();
-                let travail = $("input[name='travail']:checked").val();
-
                 $.ajax({
                     url: './ActionServlet',
                     type: 'POST',
                     data: {
                         todo: 'prediction',
-                        idClient: idClient,
-                        amour: amour,
-                        sante: sante,
-                        travail: travail
+                        clientId: idClient,
+                        love: $("input[name='amour']:checked").val(),
+                        health: $("input[name='sante']:checked").val(),
+                        work: $("input[name='travail']:checked").val()
                     },
                     dataType: 'json'
                 })
@@ -112,8 +156,110 @@
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
                     });
+            });
+            $("#ready").on("click", function () {
+                $.ajax({
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'commencer_consultation',
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (response) {
 
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
+            });
+            $("#end").on("click", function () {
+                let params = new URLSearchParams(window.location.search);
+                let idClient = params.get("idClient");
+                $.ajax({
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'terminer_consultation',
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (response) {
 
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
+            });
+            $("#see-more").on("click", function () {
+                $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'liste_medium_ordonnee',
+                },
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    let listeMediums = $("#medium-list");
+                    listeMediums.empty();
+                    for (const medium of response) {
+                        listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
+                        $("#" + medium.id).on("click", function () {
+                            if (connected) {
+                                window.location = "medium.html?id=" + medium.id;
+                            } else {
+                                alert("Vous devez être connecté pour accéder à cette page.");
+                            }
+                        });
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+            });
+            $("#searchButton").on("click", function () {
+                let searchValue = $("#search").val();
+                $.ajax({
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'liste_clients_contenant',
+                        subString: searchValue
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (response) {
+                        let listeClients = $("#search-results");
+                        listeClients.empty();
+                        for (const client of response) {
+                            listeClients.append("<li id=client-" + client.id + " class=\"client-template\"><p>" + client.prenom + "</p><p>" + client.nom + "<p><input type=\"button\" id=\"clientDiagram-" + client.id + "\" value=\"Voir diagramme\" /></li>");
+                            $("#clientDiagram-" + client.id).on("click", function () {
+                                if (connected) {
+                                    window.location = "diagram.html?id=" + client.id;
+                                } else {
+                                    alert("Vous devez être connecté pour accéder à cette page.");
+                                }
+                            });
+                        }
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
+            });
+            $("#map").on("click", function () {
+                if (connected) {
+                    window.location = "repartition.html";
+                } else {
+                    alert("Vous devez être connecté pour accéder à cette page.");
+                }
+            });
+            $("#return").on("click", function () {
+                if (connected) {
+                    window.location = "index.html";
+                } else {
+                    alert("Vous devez être connecté pour accéder à cette page.");
+                }
             });
         });
     </script>

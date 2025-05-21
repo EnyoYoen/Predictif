@@ -7,7 +7,6 @@
     <title>TP 3IF Ajax</title>
     <meta name="author" content="Előd EGYED-ZSIGMOND">
 
-    <script type="text/javascript" src="partieJavascript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -37,7 +36,7 @@
                 })
                     .done(function (response) {
                         if (response.etat == "employe") {
-                            window.location = "employe.html";
+                            window.location = "employee.html";
                         }
                         else if (response.etat == "client") {
                             window.location = "accueil.html";

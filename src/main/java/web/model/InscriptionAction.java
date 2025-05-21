@@ -33,18 +33,30 @@ public class InscriptionAction extends Action {
         String address = request.getParameter("address");
         String birthdate = request.getParameter("birthdate");
         String genre = request.getParameter("genre");
+        
 
-        DateFormat format = new SimpleDateFormat("MMMM dd yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
         Date date = null;
         try {
-            date = format.parse(birthdate);
+            if (birthdate == null || birthdate.isEmpty()) {
+                System.out.println("AAAA");
+                request.setAttribute("client", null);
+                return;
+            } else {
+                date = format.parse(birthdate);
+            }
         } catch (ParseException ex) {
             request.setAttribute("client", null);
             return;
         }
 
         Client client = service.enregisterClient(new Client(address, date, lastname, firstname, phone, genre, password, mail));
-        request.setAttribute("client", client);
+        if (client == null) {
+            request.setAttribute("client", null);
+            return;
+        } else {
+            request.setAttribute("client", client);
+        }
         if (client != null) {
             request.getSession().setAttribute("id", client.getId());
             request.getSession().setAttribute("type", "client");

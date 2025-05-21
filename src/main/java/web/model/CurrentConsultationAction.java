@@ -28,11 +28,17 @@ public class CurrentConsultationAction extends Action {
         Individu ind = service.findIndividuById(id);
         if (id != null && ind != null && ind instanceof Employe) {
             Consultation cons = ((Employe) ind).getConsultationEnCours();
-            Client client = cons.getClient();
-            Medium medium = cons.getMedium();
-            request.setAttribute("consultation", cons);
-            request.setAttribute("client", client);
-            request.setAttribute("medium", medium);
+            if (cons != null) {
+                Client client = cons.getClient();
+                Medium medium = cons.getMedium();
+                request.setAttribute("consultation", cons);
+                request.setAttribute("client", client);
+                request.setAttribute("medium", medium);
+            } else {
+                request.setAttribute("consultation", null);
+                request.setAttribute("client", null);
+                request.setAttribute("medium", null);
+            }
         } else {
             request.setAttribute("consultation", null);
             request.setAttribute("client", null);

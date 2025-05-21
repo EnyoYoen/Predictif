@@ -32,13 +32,19 @@ public class CurrentConsultationSerialisation {
         } catch (IOException e) {
             return;
         }
+        response.setContentType("application/json;charset=UTF-8");
 
+        Consultation consultation = (Consultation) request.getAttribute("consultation");
+        Client client = (Client) request.getAttribute("client");
+        Medium medium = (Medium) request.getAttribute("medium");
+        
         Map<String, Object> data;
 
         data = new HashMap<>();
-        data.put("consultation", (Consultation) request.getAttribute("consultation"));
-        data.put("client", (Client) request.getAttribute("client"));
-        data.put("medium", (Medium) request.getAttribute("medium"));
+        data.put("consultation", consultation);
+        data.put("client", client);
+        data.put("medium", medium);
+        data.put("connected", request.getSession().getAttribute("id") != null);
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();

@@ -26,7 +26,7 @@ public class PredictionAction extends Action {
             Integer love = Integer.parseInt(request.getParameter("love"));
             Integer health = Integer.parseInt(request.getParameter("health"));
             Integer work = Integer.parseInt(request.getParameter("work"));
-            Long clientId = Long.parseLong("clientId");
+            Long clientId = Long.parseLong(request.getParameter("clientId"));
             
             Client client = (Client)service.findIndividuById(clientId);
             
@@ -36,6 +36,7 @@ public class PredictionAction extends Action {
             request.setAttribute("predi_health", predictions.get(1));
             request.setAttribute("predi_work", predictions.get(2));
         } catch (NumberFormatException e) {
+            System.out.println("Error parsing parameters: " + e.getMessage());
             request.setAttribute("predi_love", null);
             request.setAttribute("predi_health", null);
             request.setAttribute("predi_work", null);
