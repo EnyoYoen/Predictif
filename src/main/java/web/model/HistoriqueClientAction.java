@@ -26,7 +26,13 @@ public class HistoriqueClientAction extends Action {
         String clientId = request.getParameter("clientId");
 
         try {
-            Long id = Long.parseLong(clientId);
+            Long id;
+            if (clientId == null && request.getSession().getAttribute("type") != null
+                    && request.getSession().getAttribute("type").equals("client")) {
+                id = (Long)request.getSession().getAttribute("id");
+            } else {
+                id = Long.parseLong(clientId);
+            }
             Client client = (Client)service.findIndividuById(id);
             request.setAttribute("client", client);
             request.setAttribute("listeConsultations", null);
