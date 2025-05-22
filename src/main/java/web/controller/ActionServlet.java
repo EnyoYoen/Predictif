@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metier.service.Service;
-import web.model.AccueilConnexionAction;
 import web.model.AccueilListeMediumAction;
 import web.model.CommencerConsultationAction;
+import web.model.ConnectedAction;
 import web.model.ConnexionAction;
 import web.model.CurrentConsultationAction;
 import web.model.HistoriqueClientAction;
@@ -57,8 +57,8 @@ public class ActionServlet extends HttpServlet {
         Service service = new Service();
         //service.initialisationBD();
         switch (todo) {
-            case "accueil_connexion":
-                new AccueilConnexionAction(service).execute(req);
+            case "connected":
+                new ConnectedAction(service).execute(req);
                 new ConnexionSerialisation().apply(req, res);
                 break;
             case "accueil_liste_medium":

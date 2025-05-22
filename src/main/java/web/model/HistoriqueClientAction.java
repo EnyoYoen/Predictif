@@ -28,6 +28,7 @@ public class HistoriqueClientAction extends Action {
         try {
             Long id = Long.parseLong(clientId);
             Client client = (Client)service.findIndividuById(id);
+            request.setAttribute("client", client);
             request.setAttribute("listeConsultations", null);
             // SERVICE NON IMPLEMENTE PAR L'ANCIEN GROUPE ??
             //List<Consultation> consultations = service.getHistoriqueClient(client);

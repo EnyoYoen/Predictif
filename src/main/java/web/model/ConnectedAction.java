@@ -12,14 +12,14 @@ import metier.service.Service;
  *
  * @author ypeyrot
  */
-public class AccueilConnexionAction extends Action {
+public class ConnectedAction extends Action {
 
-    public AccueilConnexionAction(Service service) {
+    public ConnectedAction(Service service) {
         super(service);
     }
 
     public void execute(HttpServletRequest request) {
-        request.setAttribute("connected", request.getSession().getAttribute("mail") != null);
+        request.setAttribute("connected", request.getSession().getAttribute("id") != null);
         request.setAttribute("type", request.getSession().getAttribute("type"));
     }
 }

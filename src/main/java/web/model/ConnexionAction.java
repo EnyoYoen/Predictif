@@ -31,5 +31,8 @@ public class ConnexionAction extends Action {
             String type = ((ind instanceof Client) ? "client" : "employee");
             request.getSession().setAttribute("type", type);
         }
+        
+        request.setAttribute("connected", request.getSession().getAttribute("id") != null);
+        request.setAttribute("type", request.getSession().getAttribute("type"));
     }
 }
