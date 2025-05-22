@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TP 3IF Ajax</title>
+    <meta name="author" content="Előd EGYED-ZSIGMOND">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <h1 id="history-title"></h1>
+    <input type="button" id="back" value="Retour" />
+
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('clientId');
+
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'connected',
+                },
+                dataType: 'json'
+            })
+            .done(function (response) {
+                if (response.type != "employee" || response.connected == "false") {
+                    window.location = "index.html";
+                } else {
+                    connectedAsEmployee = true;
+                    $.ajax({
+                        url: './ActionServlet',
+                        type: 'POST',
+                        data: {
+                            todo: 'repartition_employe',
+                        },
+                        dataType: 'json'
+                    })
+                    .done(function (response) {
+                        
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+            });
+
+            $("#back").on("click", function () {
+                window.location = "employee.html";
+            });
+        });
+    </script>
+
+</body>
+
+</html>

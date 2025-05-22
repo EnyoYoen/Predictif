@@ -52,10 +52,10 @@ public class InscriptionAction extends Action {
 
         Client client = service.enregisterClient(new Client(address, date, lastname, firstname, phone, genre, password, mail));
         if (client == null) {
-            request.setAttribute("client", null);
+            request.setAttribute("success", false);
             return;
         } else {
-            request.setAttribute("client", client);
+            request.setAttribute("success", true);
         }
         if (client != null) {
             request.getSession().setAttribute("id", client.getId());

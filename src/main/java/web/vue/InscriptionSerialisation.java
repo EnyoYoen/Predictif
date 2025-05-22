@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metier.modele.Client;
@@ -19,7 +21,7 @@ import metier.modele.Client;
  *
  * @author ypeyrot
  */
-public class ClientSerialisation{
+public class InscriptionSerialisation{
 
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
@@ -29,26 +31,15 @@ public class ClientSerialisation{
             return;
         }
         response.setContentType("application/json;charset=UTF-8");
-
-        Client client = (Client) request.getAttribute("client");
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", request.getAttribute("success"));
 
         GsonBuilder builder = new GsonBuilder();
 
-        builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("mdp");
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-        });
-
         Gson gson = builder.create();
 
-        out.println(gson.toJson(client));
+        out.println(gson.toJson(map));
 
         out.close();
     }

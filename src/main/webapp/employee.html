@@ -124,7 +124,7 @@
                         listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "medium.html?id=" + medium.id;
+                                window.location = "mediumEmployee.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
@@ -207,7 +207,7 @@
                         listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "medium.html?id=" + medium.id;
+                                window.location = "mediumEmployee.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
@@ -236,7 +236,7 @@
                             listeClients.append("<li id=client-" + client.id + " class=\"client-template\"><p>" + client.prenom + "</p><p>" + client.nom + "<p><input type=\"button\" id=\"clientDiagram-" + client.id + "\" value=\"Voir diagramme\" /></li>");
                             $("#clientDiagram-" + client.id).on("click", function () {
                                 if (connected) {
-                                    window.location = "diagram.html?id=" + client.id;
+                                    window.location = "diagram.html?clientId=" + client.id;
                                 } else {
                                     alert("Vous devez être connecté pour accéder à cette page.");
                                 }

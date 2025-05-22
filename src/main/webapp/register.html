@@ -62,11 +62,8 @@
                         dataType: 'json'
                     })
                         .done(function (response) {
-                            if (response.succes == "true") {
-                                window.location = "index.html";
-                            }
-                            else if (response.succes == "false") {
-                                $("#fill_fields").text("Erreur d'inscription");
+                            if (response.success != null && response.success == true) {
+                                window.location = "valid.html";
                             }
                             else {
                                 $("#fill_fields").text("Erreur d'inscription");

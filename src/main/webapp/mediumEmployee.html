@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TP 3IF Ajax</title>
+    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Informations sur le medium</h1>
+    <br />
+    <span id="name"></span>
+    <br />
+    <span id="description"></span>
+    <br />
+    <span id="type"></span>
+    <br />
+    <span id="info1"></span>
+    <br />
+    <span id="info2"></span>
+    <br />
+    <input name="Retour" type="button" id="return" value="Retour" />
+
+
+
+
+
+
+
+
+
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let idMedium = params.get("id");
+        $(document).ready(function () {
+            $("#return").on("click", function () {
+                window.location = "employee.html"
+            });
+            $.ajax({
+                url: './ActionServlet',
+                type: 'GET',
+                data: {
+                    todo: 'infos_medium',
+                    id: idMedium
+                },
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    $("#name").text("Nom : " + response.medium.denomination);
+                    $("#description").text("Description : " + response.medium.description);
+                    $("#type").text("Type : " + response.class);
+                    if (response.class == "Spirite") {
+                        $("#info1").text(response.medium.support);
+                    }
+                    else if (response.class == "Astrologue") {
+                        $("#info1").text(response.medium.formation);
+                        $("#info2").text(response.medium.promotion);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
+        });
+    </script>
+
+</body>
+
+</html>

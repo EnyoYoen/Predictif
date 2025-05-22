@@ -28,11 +28,11 @@ import web.model.RepartitionClientAction;
 import web.model.RepartitionEmployeAction;
 import web.model.TerminerConsultationAction;
 import web.model.TopMediumAction;
-import web.vue.ClientSerialisation;
 import web.vue.ConnexionSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.MediumSerialisation;
 import web.vue.IndividuSerialisation;
+import web.vue.InscriptionSerialisation;
 import web.vue.ListeClientSerialisation;
 import web.vue.ListeConsultationSerialisation;
 import web.vue.ListeMediumSerialisation;
@@ -95,10 +95,6 @@ public class ActionServlet extends HttpServlet {
             case "terminer_consultation":
                 new TerminerConsultationAction(service).execute(req);
                 break;
-            /*case "liste_clients":
-                new ListeClientsAction(service).execute(req);
-                new ListeClientSerialisation().apply(req, res);
-                break;*/
             case "repartition_employe":
                 new RepartitionEmployeAction(service).execute(req);
                 new RepartitionEmployeSerialisation().apply(req, res);
@@ -121,7 +117,7 @@ public class ActionServlet extends HttpServlet {
                 break;
             case "inscription":
                 new InscriptionAction(service).execute(req);
-                new ClientSerialisation().apply(req, res);
+                new InscriptionSerialisation().apply(req, res);
                 break;
             default:
                 break;

@@ -36,11 +36,11 @@
                 .done(function (response) {
                     if (response.type == "employee") {
                         window.location = "employee.html"
-                    } else if (response.connected == "false") {
+                    } else if (response.connected == false) {
                         $("#signin").show();
                         $("#login").show();
                         $("#history").hide();
-                    } else if (response.connected == "true") {
+                    } else if (response.connected == true) {
                         $("#signin").hide();
                         $("#login").hide();
                         $("#history").show();
@@ -65,7 +65,7 @@
                         listeMediums.append("<div id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p></div>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "medium.html?id=" + medium.id;
+                                window.location = "mediumClient.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
@@ -83,7 +83,7 @@
 <body>
     <header>
         <div id="header-container">
-            <a href="history.html">Historique</a>
+            <a href="clientHistoryClient.html">Historique</a>
             <div id="#header-buttons">
                 <input name="Inscription" type="button" id="signin" value="Inscription" />
                 <input name="Connexion" type="button" id="login" value="Connexion" />

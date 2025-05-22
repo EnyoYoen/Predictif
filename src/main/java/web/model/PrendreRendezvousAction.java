@@ -13,14 +13,13 @@ public class PrendreRendezvousAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request) {
-        String clientId = request.getParameter("clientId");
         String mediumId = request.getParameter("mediumId");
         
         try {
-            Long idc = Long.parseLong(clientId);
+            Long clientId = (Long)request.getSession().getAttribute("id");
             Long idm = Long.parseLong(mediumId);
             
-            Client client = (Client)service.findIndividuById(idc);
+            Client client = (Client)service.findIndividuById(clientId);
             Medium medium = service.findMediumById(idm);
             if (client == null || medium == null) {
                 request.setAttribute("error", true);
@@ -28,7 +27,7 @@ public class PrendreRendezvousAction extends Action {
             } else {
                 Employe employe = service.priseRDV(client, medium);
                 request.setAttribute("error", false);
-                request.setAttribute("available", true);
+                request.setAttribute("available", employe != null);
             }
         } catch (Exception e) {
             request.setAttribute("error", true);
