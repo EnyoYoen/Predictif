@@ -2,45 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>TP 3IF Ajax</title>
-    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <title>Predict'IF - Inscription</title>
+
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/register.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body>
-    <h1>Inscription</h1>
-    <br />
-    Adresse mail : <input name="text" type="text" id="email" value="" />
-    <br /><br />
-    <span id="mdpcolor" style="color: black">Mot de passe : </span> <input name="text" type="text" id="mdp" value="" />
-    <br /><br />
-    Confirmation du mot de passe : <input name="text" type="text" id="cmdp" value="" />
-    <br /><br />
-    Nom : <input name="text" type="text" id="lastname" value="" />
-    <br /><br />
-    Prenom : <input name="text" type="text" id="firstname" value="" />
-    <br /><br />
-    Telephone : <input name="text" type="text" id="phone" value="" />
-    <br /><br />
-    Adresse : <input name="text" type="text" id="address" value="" />
-    <br /><br />
-    Date de naissance : <input type="date" id="birthday" name="birthday">
-    <br /><br />
-    Genre : <input type="radio" id="man" name="genre" value=1 checked><label for="man">Homme</label>
-    <input type="radio" id="woman" name="genre" value=2><label for="woman">Femme</label>
-    <br /><br />
-    <span id="fill_fields" style="color: red"></span>
-
-
-    <input name="Inscription" type="button" id="signin" value="Inscription" />
-
-
-
-
     <script>
         $(document).ready(function () {
             $("#signin").on("click", function () {
@@ -82,7 +53,32 @@
             });
         });
     </script>
+</head>
 
+<body>
+    <h1>Inscription</h1>
+    <br />
+    Adresse mail : <input name="text" type="text" id="email" value="" />
+    <br /><br />
+    <span id="mdpcolor" style="color: black">Mot de passe : </span> <input name="text" type="text" id="mdp" value="" />
+    <br /><br />
+    Confirmation du mot de passe : <input name="text" type="text" id="cmdp" value="" />
+    <br /><br />
+    Nom : <input name="text" type="text" id="lastname" value="" />
+    <br /><br />
+    Prenom : <input name="text" type="text" id="firstname" value="" />
+    <br /><br />
+    Telephone : <input name="text" type="text" id="phone" value="" />
+    <br /><br />
+    Adresse : <input name="text" type="text" id="address" value="" />
+    <br /><br />
+    Date de naissance : <input type="date" id="birthday" name="birthday">
+    <br /><br />
+    Genre : <input type="radio" id="man" name="genre" value=1 checked><label for="man">Homme</label>
+    <input type="radio" id="woman" name="genre" value=2><label for="woman">Femme</label>
+    <br /><br />
+    <span id="fill_fields" style="color: red"></span>
+    <input name="Inscription" type="button" id="signin" value="Inscription" />
 </body>
 
 </html>

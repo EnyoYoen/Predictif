@@ -2,25 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>TP 3IF Ajax</title>
-    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <title>Predict'IF - Connexion</title>
+
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/connect.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body>
-    <h1>Connexion</h1>
-    <br />
-    Adresse mail : <input name="text" type="text" id="email" value="" />
-    <br /><br />
-    Mot de passe : <input name="text" type="text" id="mdp" value="" />
-    <br /><br />
-    <input name="Connexion" type="button" id="login" value="Connexion" />
-    <br /><br />
-    <input name="Inscription" type="button" id="signin" value="Inscription" />
     <script>
         $(document).ready(function () {
             $("#login").on("click", function () {
@@ -54,7 +45,18 @@
             });
         });
     </script>
+</head>
 
+<body>
+    <h1>Connexion</h1>
+    <br />
+    Adresse mail : <input name="text" type="text" id="email" value="" />
+    <br /><br />
+    Mot de passe : <input name="text" type="text" id="mdp" value="" />
+    <br /><br />
+    <input name="Connexion" type="button" id="login" value="Connexion" />
+    <br /><br />
+    <input name="Inscription" type="button" id="signin" value="Inscription" />
 </body>
 
 </html>

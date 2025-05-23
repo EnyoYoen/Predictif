@@ -2,20 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>TP 3IF Ajax</title>
-    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <title>Predict'IF - Historique</title>
+
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/client-history.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body>
-    <h1 id="history-title">Historique des consultations</h1>
-    <ul id="history-list"></ul>
-    <input type="button" id="back" value="Retour" />
-
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -26,25 +22,30 @@
                 },
                 dataType: 'json'
             })
-            .done(function (response) {
-                $("#history-list").empty();
-                for (let i = 0; i < response.length; i++) {
-                    const consultation = response[i];
-                    const listItem = $("<li></li>");
-                    listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>" + consultation.medium.DType + "</p><a href='medium.html?id=" + consultation.medium.id + "'>Reprendre RDV</a>");
-                    $("#history-list").append(listItem);
-                }
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-            });
+                .done(function (response) {
+                    $("#history-list").empty();
+                    for (let i = 0; i < response.length; i++) {
+                        const consultation = response[i];
+                        const listItem = $("<li></li>");
+                        listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>" + consultation.medium.DType + "</p><a href='medium.html?id=" + consultation.medium.id + "'>Reprendre RDV</a>");
+                        $("#history-list").append(listItem);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                });
 
             $("#back").on("click", function () {
                 window.location = "index.html";
             });
         });
     </script>
+</head>
 
+<body>
+    <h1 id="history-title">Historique des consultations</h1>
+    <ul id="history-list"></ul>
+    <input type="button" id="back" value="Retour" />
 </body>
 
 </html>

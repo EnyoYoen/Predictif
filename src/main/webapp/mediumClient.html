@@ -2,40 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>TP 3IF Ajax</title>
-    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <title>Predict'IF - Medium</title>
+
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/medium.css" />
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body>
-    <h1>Informations sur le medium</h1>
-    <br />
-    <span id="name"></span>
-    <br />
-    <span id="description"></span>
-    <br />
-    <span id="type"></span>
-    <br />
-    <span id="info1"></span>
-    <br />
-    <span id="info2"></span>
-    <br />
-    <input name="Rendez-vous" type="button" id="appointment" value="PRENEZ RDV" />
-    <br />
-    <input name="Retour" type="button" id="return" value="Retour" />
-
-
-
-
-
-
-
-
-
-
     <script>
         let params = new URLSearchParams(window.location.search);
         let idMedium = params.get("id");
@@ -90,7 +66,24 @@
                 });
         });
     </script>
+</head>
 
+<body>
+    <h1>Informations sur le medium</h1>
+    <br />
+    <span id="name"></span>
+    <br />
+    <span id="description"></span>
+    <br />
+    <span id="type"></span>
+    <br />
+    <span id="info1"></span>
+    <br />
+    <span id="info2"></span>
+    <br />
+    <input name="Rendez-vous" type="button" id="appointment" value="PRENEZ RDV" />
+    <br />
+    <input name="Retour" type="button" id="return" value="Retour" />
 </body>
 
 </html>

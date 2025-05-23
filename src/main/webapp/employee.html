@@ -2,88 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>TP 3IF Ajax</title>
-    <meta name="author" content="Előd EGYED-ZSIGMOND">
+    <title>Predict'IF - Employé</title>
+
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/employee.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body>
-    <h1>Espace consultation</h1>
-    <br />
-    <h2>Prochaine consultation</h2>
-    <br />
-    <span id="clientName"></span>
-    <br />
-    <span id="clientFirstName"></span>
-    <br />
-    <span id="clientBirthDay"></span>
-    <br />
-    <p>Profil Astral</p>
-    <ul id="clientProfile">
-
-    </ul>
-
-    <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
-    <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour amour -->
-    Amour : <input type="radio" id="amour1" name="amour" value="1" checked><label for="amour1">1</label>
-    <input type="radio" id="amour2" name="amour" value="2"><label for="amour2">2</label>
-    <input type="radio" id="amour3" name="amour" value="3"><label for="amour3">3</label>
-    <input type="radio" id="amour4" name="amour" value="4"><label for="amour4">4</label>
-    <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour Santé -->
-    Sante : <input type="radio" id="sante1" name="sante" value="1" checked><label for="sante1">1</label>
-    <input type="radio" id="sante2" name="sante" value="2"><label for="sante2">2</label>
-    <input type="radio" id="sante3" name="sante" value="3"><label for="sante3">3</label>
-    <input type="radio" id="sante4" name="sante" value="4"><label for="sante4">4</label>
-    <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour Travail -->
-    Travail : <input type="radio" id="travail1" name="travail" value="1" checked><label for="travail1">1</label>
-    <input type="radio" id="travail2" name="travail" value="2"><label for="travail2">2</label>
-    <input type="radio" id="travail3" name="travail" value="3"><label for="travail3">3</label>
-    <input type="radio" id="travail4" name="travail" value="4"><label for="travail4">4</label>
-    <br />
-    <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
-    <br />
-    <input name="ready" type="button" id="ready" value="Prêt" />
-    <br />
-    <input name="end" type="button" id="end" value="Terminer" />
-
-    <h1>Statistiques</h1>
-    <p>Top 5 des mediums</p>
-    <ul id="medium-list">
-        <li></li>
-    </ul>
-
-    <input name="Voir plus" type="button" id="see-more" value="Voir plus" />
-
-    <p>Répartition des clients par employé</p>
-    <p>Rechercher par nom</p>
-    <input type="text" id="search" />
-    <input name="search" type="button" id="searchButton" value="Rechercher" />
-
-    <ul id="search-results">
-        <li></li>
-    </ul>
-
-    <input name="map" type="button" id="map" value="Carte des clients" />
-    <br />
-
-    <input name="return" type="button" id="return" value="Retour" />
-    <br />
-
-
-
-
-
-
-
-
-
     <script>
         var connected = false;
         var idClient = 52;
@@ -193,30 +121,30 @@
             });
             $("#see-more").on("click", function () {
                 $.ajax({
-                url: './ActionServlet',
-                type: 'POST',
-                data: {
-                    todo: 'liste_medium_ordonnee',
-                },
-                dataType: 'json'
-            })
-                .done(function (response) {
-                    let listeMediums = $("#medium-list");
-                    listeMediums.empty();
-                    for (const medium of response) {
-                        listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
-                        $("#" + medium.id).on("click", function () {
-                            if (connected) {
-                                window.location = "mediumEmployee.html?id=" + medium.id;
-                            } else {
-                                alert("Vous devez être connecté pour accéder à cette page.");
-                            }
-                        });
-                    }
+                    url: './ActionServlet',
+                    type: 'POST',
+                    data: {
+                        todo: 'liste_medium_ordonnee',
+                    },
+                    dataType: 'json'
                 })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                });
+                    .done(function (response) {
+                        let listeMediums = $("#medium-list");
+                        listeMediums.empty();
+                        for (const medium of response) {
+                            listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
+                            $("#" + medium.id).on("click", function () {
+                                if (connected) {
+                                    window.location = "mediumEmployee.html?id=" + medium.id;
+                                } else {
+                                    alert("Vous devez être connecté pour accéder à cette page.");
+                                }
+                            });
+                        }
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    });
             });
             $("#searchButton").on("click", function () {
                 let searchValue = $("#search").val();
@@ -263,7 +191,72 @@
             });
         });
     </script>
+</head>
 
+<body>
+    <h1>Espace consultation</h1>
+    <br />
+    <h2>Prochaine consultation</h2>
+    <br />
+    <span id="clientName"></span>
+    <br />
+    <span id="clientFirstName"></span>
+    <br />
+    <span id="clientBirthDay"></span>
+    <br />
+    <p>Profil Astral</p>
+    <ul id="clientProfile">
+
+    </ul>
+
+    <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour amour -->
+    Amour : <input type="radio" id="amour1" name="amour" value="1" checked><label for="amour1">1</label>
+    <input type="radio" id="amour2" name="amour" value="2"><label for="amour2">2</label>
+    <input type="radio" id="amour3" name="amour" value="3"><label for="amour3">3</label>
+    <input type="radio" id="amour4" name="amour" value="4"><label for="amour4">4</label>
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour Santé -->
+    Sante : <input type="radio" id="sante1" name="sante" value="1" checked><label for="sante1">1</label>
+    <input type="radio" id="sante2" name="sante" value="2"><label for="sante2">2</label>
+    <input type="radio" id="sante3" name="sante" value="3"><label for="sante3">3</label>
+    <input type="radio" id="sante4" name="sante" value="4"><label for="sante4">4</label>
+    <br />
+    <!-- 4 boutons radios marqué 1 à 4 pour Travail -->
+    Travail : <input type="radio" id="travail1" name="travail" value="1" checked><label for="travail1">1</label>
+    <input type="radio" id="travail2" name="travail" value="2"><label for="travail2">2</label>
+    <input type="radio" id="travail3" name="travail" value="3"><label for="travail3">3</label>
+    <input type="radio" id="travail4" name="travail" value="4"><label for="travail4">4</label>
+    <br />
+    <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
+    <br />
+    <input name="ready" type="button" id="ready" value="Prêt" />
+    <br />
+    <input name="end" type="button" id="end" value="Terminer" />
+
+    <h1>Statistiques</h1>
+    <p>Top 5 des mediums</p>
+    <ul id="medium-list">
+        <li></li>
+    </ul>
+
+    <input name="Voir plus" type="button" id="see-more" value="Voir plus" />
+
+    <p>Répartition des clients par employé</p>
+    <p>Rechercher par nom</p>
+    <input type="text" id="search" />
+    <input name="search" type="button" id="searchButton" value="Rechercher" />
+
+    <ul id="search-results">
+        <li></li>
+    </ul>
+
+    <input name="map" type="button" id="map" value="Carte des clients" />
+    <br />
+
+    <input name="return" type="button" id="return" value="Retour" />
+    <br />
 </body>
 
 </html>
