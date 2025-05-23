@@ -52,7 +52,7 @@
                         listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "mediumEmployee.html?id=" + medium.id;
+                                window.location = "medium-employee.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
@@ -63,7 +63,7 @@
                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
                 });
             $("#clientHistory").on("click", function () {
-                window.location = "clientHistoryEmployee.html"
+                window.location = "client-history-employee.html"
             });
             $("#predGen").on("click", function () {
                 $.ajax({
@@ -135,7 +135,7 @@
                             listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
                             $("#" + medium.id).on("click", function () {
                                 if (connected) {
-                                    window.location = "mediumEmployee.html?id=" + medium.id;
+                                    window.location = "medium-employee.html?id=" + medium.id;
                                 } else {
                                     alert("Vous devez être connecté pour accéder à cette page.");
                                 }
@@ -177,7 +177,7 @@
             });
             $("#map").on("click", function () {
                 if (connected) {
-                    window.location = "repartition.html";
+                    window.location = "distribution.html";
                 } else {
                     alert("Vous devez être connecté pour accéder à cette page.");
                 }

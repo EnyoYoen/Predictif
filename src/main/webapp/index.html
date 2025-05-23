@@ -20,10 +20,10 @@
                 window.location = "register.html"
             });
             $("#login").on("click", function () {
-                window.location = "connect.html"
+                window.location = "login.html"
             });
             $("#history").on("click", function () {
-                window.location = "history.html"
+                window.location = "client-history.html"
             });
             $.ajax({
                 url: './ActionServlet',
@@ -65,7 +65,7 @@
                         listeMediums.append("<div id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p></div>");
                         $("#" + medium.id).on("click", function () {
                             if (connected) {
-                                window.location = "mediumClient.html?id=" + medium.id;
+                                window.location = "medium.html?id=" + medium.id;
                             } else {
                                 alert("Vous devez être connecté pour accéder à cette page.");
                             }
@@ -82,7 +82,7 @@
 <body>
     <header>
         <div id="header-container">
-            <a href="clientHistoryClient.html">Historique</a>
+            <a href="client-history.html">Historique</a>
             <div id="#header-buttons">
                 <input name="Inscription" type="button" id="signin" value="Inscription" />
                 <input name="Connexion" type="button" id="login" value="Connexion" />
