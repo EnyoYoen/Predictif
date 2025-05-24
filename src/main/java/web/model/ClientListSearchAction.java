@@ -14,6 +14,6 @@ public class ClientListSearchAction extends Action {
     public void execute(HttpServletRequest request) {
         String subString = request.getParameter("subString");
         List<Client> clients = service.getListeClientsContainingName(subString);
-        request.setAttribute("listeClients", clients);
+        request.setAttribute("clientList", clients);
     }
 }

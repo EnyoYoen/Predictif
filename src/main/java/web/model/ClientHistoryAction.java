@@ -29,18 +29,18 @@ public class ClientHistoryAction extends Action {
             Long id;
             if (clientId == null && request.getSession().getAttribute("type") != null
                     && request.getSession().getAttribute("type").equals("client")) {
-                id = (Long)request.getSession().getAttribute("id");
+                id = (Long) request.getSession().getAttribute("id");
             } else {
                 id = Long.parseLong(clientId);
             }
-            Client client = (Client)service.findIndividuById(id);
+            Client client = (Client) service.findIndividuById(id);
             request.setAttribute("client", client);
-            request.setAttribute("listeConsultations", null);
-            // SERVICE NON IMPLEMENTE PAR L'ANCIEN GROUPE ??
-            //List<Consultation> consultations = service.getHistoriqueClient(client);
-            //request.setAttribute("listeConsultations", consultations);
+            request.setAttribute("consultationList", null);
+            // SERVICE NOT IMPLEMENTED BY THE PREVIOUS GROUP??
+            // List<Consultation> consultations = service.getHistoriqueClient(client);
+            // request.setAttribute("consultationList", consultations);
         } catch (NumberFormatException e) {
-            request.setAttribute("listeConsultations", null);
+            request.setAttribute("consultationList", null);
         }
     }
 }

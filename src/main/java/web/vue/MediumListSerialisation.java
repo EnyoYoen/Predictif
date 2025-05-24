@@ -31,7 +31,7 @@ public class MediumListSerialisation {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(request.getAttribute("listeMedium"));
+        String json = gson.toJson(request.getAttribute("mediumList"));
 
         out.println(json);
 

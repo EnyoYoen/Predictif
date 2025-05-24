@@ -20,7 +20,7 @@ public class ClientListSerialisation {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(request.getAttribute("listeClients"));
+        String json = gson.toJson(request.getAttribute("clientList"));
 
         out.println(json);
 

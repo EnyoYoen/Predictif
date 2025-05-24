@@ -13,7 +13,7 @@ public class TopMediumAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request) {
-        List<Medium> mediums = service.getTop5Mediums();
-        request.setAttribute("listeMedium", mediums);
+        List<Medium> mediumList = service.getTop5Mediums();
+        request.setAttribute("mediumList", mediumList);
     }
 }

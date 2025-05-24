@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EmployeeDistributionSerialisation {
-    
+
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {
@@ -20,7 +20,7 @@ public class EmployeeDistributionSerialisation {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(request.getAttribute("repartitionEmploye"));
+        String json = gson.toJson(request.getAttribute("employeeDistribution"));
 
         out.println(json);
 

@@ -12,13 +12,13 @@ public class EndConsultationAction extends Action {
     @Override
     public void execute(HttpServletRequest request) {
         String consultationId = request.getParameter("consultationId");
-        String commentaire = request.getParameter("commentaire");
+        String comment = request.getParameter("comment");
         try {
-            
-        } catch (Exception e) {
             Long id = Long.parseLong(consultationId);
             Consultation consultation = service.findConsultationById(id);
-            service.validerConsultation(consultation, commentaire);
+            service.validerConsultation(consultation, comment);
+        } catch (Exception e) {
+
         }
     }
 }

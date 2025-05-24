@@ -21,7 +21,7 @@ public class MediumListAction extends Action {
     }
 
     public void execute(HttpServletRequest request) {
-        List<Medium> listeMedium = service.getListeMediums();
-        request.setAttribute("listeMedium", listeMedium);
+        List<Medium> mediumList = service.getListeMediums();
+        request.setAttribute("mediumList", mediumList);
     }
 }

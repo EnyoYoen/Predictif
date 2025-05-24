@@ -24,14 +24,14 @@ public class LoginAction extends Action {
         String password = request.getParameter("password");
         String mail = request.getParameter("mail");
         Individu ind = service.verifiermdpIndividu(mail, password);
-        request.setAttribute("individu", ind);
+        request.setAttribute("ind", ind);
 
         if (ind != null) {
             request.getSession().setAttribute("id", ind.getId());
             String type = ((ind instanceof Client) ? "client" : "employee");
             request.getSession().setAttribute("type", type);
         }
-        
+
         request.setAttribute("connected", request.getSession().getAttribute("id") != null);
         request.setAttribute("type", request.getSession().getAttribute("type"));
     }

@@ -38,7 +38,6 @@ public class RegisterAction extends Action {
         Date date = null;
         try {
             if (birthdate == null || birthdate.isEmpty()) {
-                System.out.println("AAAA");
                 request.setAttribute("client", null);
                 return;
             } else {

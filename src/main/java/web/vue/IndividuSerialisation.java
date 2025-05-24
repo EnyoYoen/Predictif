@@ -26,27 +26,30 @@ public class IndividuSerialisation {
             return;
         }
         response.setContentType("application/json;charset=UTF-8");
-        Individu individu = (Individu) request.getAttribute("individu");
+        Individu individu = (Individu) request.getAttribute("ind");
 
-        /*GsonBuilder builder = new GsonBuilder();
-
-        builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("mdp");
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-        });
-
-        Gson gson = builder.create();
-
-        out.println(gson.toJson(individu));*/
+        /*
+         * GsonBuilder builder = new GsonBuilder();
+         * 
+         * builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
+         * 
+         * @Override
+         * public boolean shouldSkipField(FieldAttributes f) {
+         * return f.getName().equals("mdp");
+         * }
+         * 
+         * @Override
+         * public boolean shouldSkipClass(Class<?> clazz) {
+         * return false;
+         * }
+         * });
+         * 
+         * Gson gson = builder.create();
+         * 
+         * out.println(gson.toJson(individu));
+         */
         if (individu != null) {
-            out.println("{\"etat\":" + (individu instanceof Employe ? "\"employe\"" : "\"client\"") + "}");
+            out.println("{\"etat\":" + (individu instanceof Employe ? "\"employee\"" : "\"client\"") + "}");
         }
 
         out.close();

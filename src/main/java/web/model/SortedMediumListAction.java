@@ -13,7 +13,7 @@ public class SortedMediumListAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request) {
-        List<Medium> mediums = service.getOrderedListMediums();
-        request.setAttribute("listeMedium", mediums);
+        List<Medium> mediumList = service.getOrderedListMediums();
+        request.setAttribute("mediumList", mediumList);
     }
 }

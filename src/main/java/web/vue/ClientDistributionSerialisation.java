@@ -19,7 +19,7 @@ public class ClientDistributionSerialisation {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(request.getAttribute("repartitionClients"));
+        String json = gson.toJson(request.getAttribute("clientDistribution"));
 
         out.println(json);
 

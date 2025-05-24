@@ -18,15 +18,15 @@ public class EmployeeDistributionAction extends Action {
         String clientId = request.getParameter("clientId");
         try {
             Long id = Long.parseLong(clientId);
-            Client client = (Client)service.findIndividuById(id);
+            Client client = (Client) service.findIndividuById(id);
             if (client != null) {
-                List<Pair<Employe, Integer>> repartition = service.getRepartitionParEmp(client);
-                request.setAttribute("repartition", repartition);
+                List<Pair<Employe, Integer>> distribution = service.getRepartitionParEmp(client);
+                request.setAttribute("distribution", distribution);
             } else {
-                request.setAttribute("repartition", null);
+                request.setAttribute("distribution", null);
             }
         } catch (Exception e) {
-            request.setAttribute("repartition", null);
+            request.setAttribute("distribution", null);
         }
     }
 }

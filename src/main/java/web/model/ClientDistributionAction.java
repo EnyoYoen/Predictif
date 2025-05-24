@@ -13,7 +13,7 @@ public class ClientDistributionAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request) {
-        List<LatLng> repartition = service.getCoordClients();
-        request.setAttribute("repartitionClients", repartition);
+        List<LatLng> distribution = service.getCoordClients();
+        request.setAttribute("client_distribution", distribution);
     }
 }
