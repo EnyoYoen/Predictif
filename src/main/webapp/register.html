@@ -15,20 +15,20 @@
     <script>
         $(document).ready(function () {
             $("#signin").on("click", function () {
-                if (document.getElementById('mdp').value == document.getElementById('cmdp').value && document.getElementById('mdp').value != "" && document.getElementById('birthday').value != "" && document.getElementById('lastname').value != "" && document.getElementById('firstname').value != "" && document.getElementById('phone').value != "" && document.getElementById('address').value != "") {
+                if (document.getElementById('password').value == document.getElementById('cpassword').value && document.getElementById('password').value != "" && document.getElementById('birthdate').value != "" && document.getElementById('lastname').value != "" && document.getElementById('firstname').value != "" && document.getElementById('phone').value != "" && document.getElementById('address').value != "") {
                     $.ajax({
                         url: './ActionServlet',
                         type: 'POST',
                         data: {
                             todo: 'inscription',
-                            mail: $('#email').val(),
-                            password: $('#mdp').val(),
+                            mail: $('#mail').val(),
+                            password: $('#password').val(),
                             lastname: $('#lastname').val(),
                             firstname: $('#firstname').val(),
                             phone: $('#phone').val(),
                             address: $('#address').val(),
-                            birthdate: $('#birthday').val(),
-                            genre: $('input[type=radio][name=genre]:checked').val()
+                            birthdate: $('#birthdate').val(),
+                            gender: $('input[type=radio][name=gender]:checked').val()
                         },
                         dataType: 'json'
                     })
@@ -43,10 +43,10 @@
                         .fail(function (error) {
                             $("#signin").text("ERREUR");
                             $("#fill_fields").text("Erreur d'inscription");
+                            console.error("Error during AJAX request: " + textStatus, errorThrown);
                         });
                 }
                 else {
-                    document.getElementById('mdpcolor').style = "color: red";
                     $("#fill_fields").text("Remplir tous les champs");
                 }
 
@@ -58,27 +58,28 @@
 <body>
     <h1>Inscription</h1>
     <br />
-    Adresse mail : <input name="text" type="text" id="email" value="" />
+    Adresse mail : <input name="email" type="text" id="mail" value="" />
     <br /><br />
-    <span id="mdpcolor" style="color: black">Mot de passe : </span> <input name="text" type="text" id="mdp" value="" />
+    Mot de passe : <input name="password" type="password" id="password" value="" />
     <br /><br />
-    Confirmation du mot de passe : <input name="text" type="text" id="cmdp" value="" />
+    Confirmation du mot de passe : <input name="cpassword" type="password" id="cpassword" value="" />
     <br /><br />
-    Nom : <input name="text" type="text" id="lastname" value="" />
+    Nom : <input name="lastname" type="text" id="lastname" value="" />
     <br /><br />
-    Prenom : <input name="text" type="text" id="firstname" value="" />
+    Prenom : <input name="firstname" type="text" id="firstname" value="" />
     <br /><br />
-    Telephone : <input name="text" type="text" id="phone" value="" />
+    Telephone : <input name="phone" type="text" id="phone" value="" />
     <br /><br />
-    Adresse : <input name="text" type="text" id="address" value="" />
+    Adresse : <input name="address" type="text" id="address" value="" />
     <br /><br />
-    Date de naissance : <input type="date" id="birthday" name="birthday">
+    Date de naissance : <input type="date" id="birthdate" name="birthdate">
     <br /><br />
-    Genre : <input type="radio" id="man" name="genre" value=1 checked><label for="man">Homme</label>
-    <input type="radio" id="woman" name="genre" value=2><label for="woman">Femme</label>
+    Genre : <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
+    <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
+    <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
     <br /><br />
     <span id="fill_fields" style="color: red"></span>
-    <input name="Inscription" type="button" id="signin" value="Inscription" />
+    <input name="signin" type="button" id="signin" value="Inscription" />
 </body>
 
 </html>

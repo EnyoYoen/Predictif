@@ -32,8 +32,7 @@ public class InscriptionAction extends Action {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String birthdate = request.getParameter("birthdate");
-        String genre = request.getParameter("genre");
-        
+        String genre = request.getParameter("gender");
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
         Date date = null;
@@ -50,7 +49,8 @@ public class InscriptionAction extends Action {
             return;
         }
 
-        Client client = service.enregisterClient(new Client(address, date, lastname, firstname, phone, genre, password, mail));
+        Client client = service
+                .enregisterClient(new Client(address, date, lastname, firstname, phone, genre, password, mail));
         if (client == null) {
             request.setAttribute("success", false);
             return;

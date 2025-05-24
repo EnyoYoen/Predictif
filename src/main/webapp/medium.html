@@ -13,57 +13,74 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let params = new URLSearchParams(window.location.search);
-        let idMedium = params.get("id");
         $(document).ready(function () {
-            $("#return").on("click", function () {
-                window.location = "index.html"
-            });
-            $("#appointment").on("click", function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'prendre_rendez_vous',
-                        mediumId: idMedium
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-                        if (response.available) {
-                            window.location = "index.html?appointment=true";
-                        } else {
-                            window.location = "index.html?appointment=false";
-                        }
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
+            let params = new URLSearchParams(window.location.search);
+            let idMedium = params.get("mediumId");
             $.ajax({
                 url: './ActionServlet',
-                type: 'GET',
+                type: 'POST',
                 data: {
-                    todo: 'infos_medium',
-                    id: idMedium
+                    todo: 'connected',
                 },
                 dataType: 'json'
             })
                 .done(function (response) {
-                    $("#name").text("Nom : " + response.medium.denomination);
-                    $("#description").text("Description : " + response.medium.description);
-                    $("#type").text("Type : " + response.class);
-                    if (response.class == "Spirite") {
-                        $("#info1").text(response.medium.support);
-                    }
-                    else if (response.class == "Astrologue") {
-                        $("#info1").text(response.medium.formation);
-                        $("#info2").text(response.medium.promotion);
+                    if (response == null || response.connected == null || response.connected == false || response.type != "client") {
+                        window.location = "index.html";
+                    } else {
+                        $("#back").on("click", function () {
+                            window.location = "index.html"
+                        });
+                        $("#appointment").on("click", function () {
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'prendre_rendez_vous',
+                                    mediumId: idMedium
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function (response) {
+                                    if (response.available) {
+                                        window.location = "index.html?appointment=true";
+                                    } else {
+                                        window.location = "index.html?appointment=false";
+                                    }
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
+                                });
+                        });
+                        $.ajax({
+                            url: './ActionServlet',
+                            type: 'GET',
+                            data: {
+                                todo: 'infos_medium',
+                                id: idMedium
+                            },
+                            dataType: 'json'
+                        })
+                            .done(function (response) {
+                                $("#name").text("Nom : " + response.medium.denomination);
+                                $("#description").text("Description : " + response.medium.description);
+                                $("#type").text("Type : " + response.class);
+                                if (response.class == "Spirite") {
+                                    $("#info1").text(response.medium.support);
+                                }
+                                else if (response.class == "Astrologue") {
+                                    $("#info1").text(response.medium.formation);
+                                    $("#info2").text(response.medium.promotion);
+                                }
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
+                            });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                });
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
+                })
         });
     </script>
 </head>
@@ -81,9 +98,9 @@
     <br />
     <span id="info2"></span>
     <br />
-    <input name="Rendez-vous" type="button" id="appointment" value="PRENEZ RDV" />
+    <input name="appointment" type="button" id="appointment" value="PRENEZ RDV" />
     <br />
-    <input name="Retour" type="button" id="return" value="Retour" />
+    <input name="back" type="button" id="back" value="Retour" />
 </body>
 
 </html>

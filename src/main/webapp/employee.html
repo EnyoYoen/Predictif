@@ -13,181 +13,177 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        var connected = false;
-        var idClient = 52;
-
         $(document).ready(function () {
+            var client = null;
+            var consultation = null;
+            var medium = null;
+
             $.ajax({
                 url: './ActionServlet',
                 type: 'POST',
                 data: {
-                    todo: 'infos_page_employee',
+                    todo: 'connected',
                 },
                 dataType: 'json'
             })
                 .done(function (response) {
-                    let client = response.client;
-                    let consultation = response.consultation;
-                    let medium = response.medium;
-                    if (client != null) {
-                        idClient = client.id;
-                    }
-                    connected = response.connected;
-                })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                });
-            $.ajax({
-                url: './ActionServlet',
-                type: 'POST',
-                data: {
-                    todo: 'top_medium',
-                },
-                dataType: 'json'
-            })
-                .done(function (liste) {
-                    let listeMediums = $("#medium-list");
-                    listeMediums.empty();
-                    for (const medium of liste) {
-                        listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
-                        $("#" + medium.id).on("click", function () {
-                            if (connected) {
-                                window.location = "medium-employee.html?id=" + medium.id;
-                            } else {
-                                alert("Vous devez être connecté pour accéder à cette page.");
+                    if (response == null || response.connected == null || response.connected == false || response.type != "employee") {
+                        window.location = "index.html";
+                    } else {
+                        $.ajax({
+                            url: './ActionServlet',
+                            type: 'POST',
+                            data: {
+                                todo: 'infos_page_employee',
+                            },
+                            dataType: 'json'
+                        })
+                            .done(function (response) {
+                                client = response.client;
+                                consultation = response.consultation;
+                                medium = response.medium;
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
+                            });
+                        $.ajax({
+                            url: './ActionServlet',
+                            type: 'POST',
+                            data: {
+                                todo: 'top_medium',
+                            },
+                            dataType: 'json'
+                        })
+                            .done(function (liste) {
+                                let listeMediums = $("#medium-list");
+                                listeMediums.empty();
+                                for (const medium of liste) {
+                                    listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
+                                    $("#" + medium.id).on("click", function () {
+                                        window.location = "medium-employee.html?mediumId=" + medium.id;
+                                    });
+                                }
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
+                            });
+                        $("#clientHistory").on("click", function () {
+                            window.location = "client-history-employee.html"
+                        });
+                        $("#predGen").on("click", function () {
+                            if (client != null) {
+                                $.ajax({
+                                    url: './ActionServlet',
+                                    type: 'POST',
+                                    data: {
+                                        todo: 'prediction',
+                                        clientId: client.id,
+                                        love: $("input[name='love']:checked").val(),
+                                        health: $("input[name='health']:checked").val(),
+                                        work: $("input[name='work']:checked").val()
+                                    },
+                                    dataType: 'json'
+                                })
+                                    .done(function (response) {
+
+                                    })
+                                    .fail(function (jqXHR, textStatus, errorThrown) {
+                                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    });
                             }
+                        });
+                        $("#ready").on("click", function () {
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'commencer_consultation',
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function () {
+
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
+                        $("#end").on("click", function () {
+                            let params = new URLSearchParams(window.location.search);
+                            let idClient = params.get("idClient");
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'terminer_consultation',
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function () {
+
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
+                        $("#see-more").on("click", function () {
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'liste_medium_ordonnee',
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function (response) {
+                                    let listeMediums = $("#medium-list");
+                                    listeMediums.empty();
+                                    for (const medium of response) {
+                                        listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
+                                        $("#" + medium.id).on("click", function () {
+                                            window.location = "medium-employee.html?mediumId=" + medium.id;
+                                        });
+                                    }
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
+                        $("#searchButton").on("click", function () {
+                            let searchValue = $("#search").val();
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'liste_clients_contenant',
+                                    subString: searchValue
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function (response) {
+                                    let listeClients = $("#search-results");
+                                    listeClients.empty();
+                                    for (const client of response) {
+                                        listeClients.append("<li id=client-" + client.id + " class=\"client-template\"><p>" + client.prenom + "</p><p>" + client.nom + "<p><input type=\"button\" id=\"clientDiagram-" + client.id + "\" value=\"Voir diagramme\" /></li>");
+                                        $("#clientDiagram-" + client.id).on("click", function () {
+                                            window.location = "diagram.html?clientId=" + client.id;
+                                        });
+                                    }
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
+                        $("#map").on("click", function () {
+                            window.location = "distribution.html";
                         });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
                 });
-            $("#clientHistory").on("click", function () {
-                window.location = "client-history-employee.html"
-            });
-            $("#predGen").on("click", function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'prediction',
-                        clientId: idClient,
-                        love: $("input[name='amour']:checked").val(),
-                        health: $("input[name='sante']:checked").val(),
-                        work: $("input[name='travail']:checked").val()
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
-            $("#ready").on("click", function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'commencer_consultation',
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
-            $("#end").on("click", function () {
-                let params = new URLSearchParams(window.location.search);
-                let idClient = params.get("idClient");
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'terminer_consultation',
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
-            $("#see-more").on("click", function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'liste_medium_ordonnee',
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-                        let listeMediums = $("#medium-list");
-                        listeMediums.empty();
-                        for (const medium of response) {
-                            listeMediums.append("<li id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p><p>" + medium.nbConsultations + "</p></li>");
-                            $("#" + medium.id).on("click", function () {
-                                if (connected) {
-                                    window.location = "medium-employee.html?id=" + medium.id;
-                                } else {
-                                    alert("Vous devez être connecté pour accéder à cette page.");
-                                }
-                            });
-                        }
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
-            $("#searchButton").on("click", function () {
-                let searchValue = $("#search").val();
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'liste_clients_contenant',
-                        subString: searchValue
-                    },
-                    dataType: 'json'
-                })
-                    .done(function (response) {
-                        let listeClients = $("#search-results");
-                        listeClients.empty();
-                        for (const client of response) {
-                            listeClients.append("<li id=client-" + client.id + " class=\"client-template\"><p>" + client.prenom + "</p><p>" + client.nom + "<p><input type=\"button\" id=\"clientDiagram-" + client.id + "\" value=\"Voir diagramme\" /></li>");
-                            $("#clientDiagram-" + client.id).on("click", function () {
-                                if (connected) {
-                                    window.location = "diagram.html?clientId=" + client.id;
-                                } else {
-                                    alert("Vous devez être connecté pour accéder à cette page.");
-                                }
-                            });
-                        }
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
-                    });
-            });
-            $("#map").on("click", function () {
-                if (connected) {
-                    window.location = "distribution.html";
-                } else {
-                    alert("Vous devez être connecté pour accéder à cette page.");
-                }
-            });
-            $("#return").on("click", function () {
-                if (connected) {
-                    window.location = "index.html";
-                } else {
-                    alert("Vous devez être connecté pour accéder à cette page.");
-                }
+            $("#back").on("click", function () {
+                window.location = "index.html";
             });
         });
     </script>
@@ -211,23 +207,20 @@
 
     <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
     <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour amour -->
-    Amour : <input type="radio" id="amour1" name="amour" value="1" checked><label for="amour1">1</label>
-    <input type="radio" id="amour2" name="amour" value="2"><label for="amour2">2</label>
-    <input type="radio" id="amour3" name="amour" value="3"><label for="amour3">3</label>
-    <input type="radio" id="amour4" name="amour" value="4"><label for="amour4">4</label>
+    Amour : <input type="radio" id="love1" name="love" value="1" checked><label for="love1">1</label>
+    <input type="radio" id="love2" name="love" value="2"><label for="love2">2</label>
+    <input type="radio" id="love3" name="love" value="3"><label for="love3">3</label>
+    <input type="radio" id="love4" name="love" value="4"><label for="love4">4</label>
     <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour Santé -->
-    Sante : <input type="radio" id="sante1" name="sante" value="1" checked><label for="sante1">1</label>
-    <input type="radio" id="sante2" name="sante" value="2"><label for="sante2">2</label>
-    <input type="radio" id="sante3" name="sante" value="3"><label for="sante3">3</label>
-    <input type="radio" id="sante4" name="sante" value="4"><label for="sante4">4</label>
+    Sante : <input type="radio" id="health1" name="health" value="1" checked><label for="health1">1</label>
+    <input type="radio" id="health2" name="health" value="2"><label for="health2">2</label>
+    <input type="radio" id="health3" name="health" value="3"><label for="health3">3</label>
+    <input type="radio" id="health4" name="health" value="4"><label for="health4">4</label>
     <br />
-    <!-- 4 boutons radios marqué 1 à 4 pour Travail -->
-    Travail : <input type="radio" id="travail1" name="travail" value="1" checked><label for="travail1">1</label>
-    <input type="radio" id="travail2" name="travail" value="2"><label for="travail2">2</label>
-    <input type="radio" id="travail3" name="travail" value="3"><label for="travail3">3</label>
-    <input type="radio" id="travail4" name="travail" value="4"><label for="travail4">4</label>
+    Travail : <input type="radio" id="work1" name="work" value="1" checked><label for="work1">1</label>
+    <input type="radio" id="work2" name="work" value="2"><label for="work2">2</label>
+    <input type="radio" id="work3" name="work" value="3"><label for="work3">3</label>
+    <input type="radio" id="work4" name="work" value="4"><label for="work4">4</label>
     <br />
     <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
     <br />
@@ -255,7 +248,7 @@
     <input name="map" type="button" id="map" value="Carte des clients" />
     <br />
 
-    <input name="return" type="button" id="return" value="Retour" />
+    <input name="back" type="button" id="back" value="Retour" />
     <br />
 </body>
 

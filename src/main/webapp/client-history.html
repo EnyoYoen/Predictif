@@ -18,21 +18,40 @@
                 url: './ActionServlet',
                 type: 'POST',
                 data: {
-                    todo: 'historique_client'
+                    todo: 'connected',
                 },
                 dataType: 'json'
             })
                 .done(function (response) {
-                    $("#history-list").empty();
-                    for (let i = 0; i < response.length; i++) {
-                        const consultation = response[i];
-                        const listItem = $("<li></li>");
-                        listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>" + consultation.medium.DType + "</p><a href='medium.html?id=" + consultation.medium.id + "'>Reprendre RDV</a>");
-                        $("#history-list").append(listItem);
+                    if (response == null || response.connected == null || response.connected == false) {
+                        window.location = "index.html";
+                    } else if (response.connected == true && response.type == "employee") {
+                        window.location = "employee.html";
+                    } else {
+                        $.ajax({
+                            url: './ActionServlet',
+                            type: 'POST',
+                            data: {
+                                todo: 'historique_client'
+                            },
+                            dataType: 'json'
+                        })
+                            .done(function (response) {
+                                $("#history-list").empty();
+                                for (let i = 0; i < response.length; i++) {
+                                    const consultation = response[i];
+                                    const listItem = $("<li></li>");
+                                    listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>" + consultation.medium.DType + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
+                                    $("#history-list").append(listItem);
+                                }
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
+                            });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
 
             $("#back").on("click", function () {

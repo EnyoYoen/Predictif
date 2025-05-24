@@ -26,10 +26,9 @@
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.type != "employee" || response.connected == "false") {
+                    if (response == null || response.connected == null || response.connected == false || response.type != "employee") {
                         window.location = "index.html";
                     } else {
-                        connectedAsEmployee = true;
                         $.ajax({
                             url: './ActionServlet',
                             type: 'POST',
@@ -42,12 +41,12 @@
 
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
-                                console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
                             });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
 
             $("#back").on("click", function () {

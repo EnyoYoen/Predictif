@@ -13,9 +13,16 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        var connected = false;
-        let params = new URLSearchParams(window.location.search);
         $(document).ready(function () {
+            params = new URLSearchParams(window.location.search);
+            if (params.has("appointment")) {
+                if (params.get("appointment") == "true") {
+                    alert("Votre rendez-vous a été pris en compte.");
+                } else {
+                    alert("Aucun créneau n'est disponible pour le moment.");
+                }
+            }
+
             $("#signin").on("click", function () {
                 window.location = "register.html"
             });
@@ -48,7 +55,7 @@
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
             $.ajax({
                 url: './ActionServlet',
@@ -64,16 +71,12 @@
                     for (const medium of liste) {
                         listeMediums.append("<div id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p></div>");
                         $("#" + medium.id).on("click", function () {
-                            if (connected) {
-                                window.location = "medium.html?id=" + medium.id;
-                            } else {
-                                alert("Vous devez être connecté pour accéder à cette page.");
-                            }
+                            window.location = "medium.html?mediumId=" + medium.id;
                         });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
         });
     </script>
