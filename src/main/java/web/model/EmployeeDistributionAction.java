@@ -8,8 +8,8 @@ import metier.modele.Client;
 import metier.modele.Employe;
 import metier.service.Service;
 
-public class RepartitionEmployeAction extends Action {
-    public RepartitionEmployeAction(Service service) {
+public class EmployeeDistributionAction extends Action {
+    public EmployeeDistributionAction(Service service) {
         super(service);
     }
 

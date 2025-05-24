@@ -6,22 +6,27 @@
 package web.model;
 
 import javax.servlet.http.HttpServletRequest;
-import metier.service.Service;
 import metier.modele.Medium;
-import java.util.List;
+import metier.service.Service;
 
 /**
  *
  * @author ypeyrot
  */
-public class AccueilListeMediumAction extends Action {
+public class MediumInfosAction extends Action {
 
-    public AccueilListeMediumAction(Service service) {
+    public MediumInfosAction(Service service) {
         super(service);
     }
 
     public void execute(HttpServletRequest request) {
-        List<Medium> listeMedium = service.getListeMediums();
-        request.setAttribute("listeMedium", listeMedium);
+        String id = request.getParameter("id");
+        Medium medium = null;
+        if (id != null) {
+            medium = service.findMediumById(Long.parseLong(id));
+        } else {
+            medium = null;
+        }
+        request.setAttribute("medium", medium);
     }
 }

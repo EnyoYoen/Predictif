@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import metier.modele.Client;
 import metier.service.Service;
 
-public class ListeClientsContenantAction extends Action {
-    public ListeClientsContenantAction(Service service) {
+public class ClientListSearchAction extends Action {
+    public ClientListSearchAction(Service service) {
         super(service);
     }
 

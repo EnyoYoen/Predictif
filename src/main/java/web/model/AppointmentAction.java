@@ -6,8 +6,8 @@ import metier.modele.Employe;
 import metier.modele.Medium;
 import metier.service.Service;
 
-public class PrendreRendezvousAction extends Action {
-    public PrendreRendezvousAction(Service service) {
+public class AppointmentAction extends Action {
+    public AppointmentAction(Service service) {
         super(service);
     }
 

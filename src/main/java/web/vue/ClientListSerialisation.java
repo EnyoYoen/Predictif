@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RepartitionClientSerialisation {
+public class ClientListSerialisation {
+
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {
@@ -19,7 +20,7 @@ public class RepartitionClientSerialisation {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        String json = gson.toJson(request.getAttribute("repartitionClients"));
+        String json = gson.toJson(request.getAttribute("listeClients"));
 
         out.println(json);
 

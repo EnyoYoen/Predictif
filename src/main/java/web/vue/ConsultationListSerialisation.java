@@ -16,7 +16,7 @@ import java.util.Map;
 import metier.modele.Client;
 import metier.modele.Consultation;
 
-public class ListeConsultationSerialisation {
+public class ConsultationListSerialisation {
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

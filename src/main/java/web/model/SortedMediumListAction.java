@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import metier.modele.Medium;
 import metier.service.Service;
 
-public class ListeMediumOrdonneeAction extends Action {
-    public ListeMediumOrdonneeAction(Service service) {
+public class SortedMediumListAction extends Action {
+    public SortedMediumListAction(Service service) {
         super(service);
     }
 

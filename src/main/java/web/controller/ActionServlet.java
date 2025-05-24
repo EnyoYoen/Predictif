@@ -12,40 +12,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metier.service.Service;
-import web.model.AccueilListeMediumAction;
-import web.model.CommencerConsultationAction;
+import web.model.AppointmentAction;
+import web.model.ClientDistributionAction;
+import web.model.ClientHistoryAction;
+import web.model.ClientListSearchAction;
 import web.model.ConnectedAction;
-import web.model.ConnexionAction;
 import web.model.CurrentConsultationAction;
-import web.model.HistoriqueClientAction;
-import web.model.InfosMediumAction;
-import web.model.InscriptionAction;
-import web.model.ListeClientsContenantAction;
-import web.model.ListeMediumOrdonneeAction;
+import web.model.EmployeeDistributionAction;
+import web.model.EndConsultationAction;
+import web.model.LoginAction;
+import web.model.MediumListAction;
+import web.model.MediumInfosAction;
 import web.model.PredictionAction;
-import web.model.PrendreRendezvousAction;
-import web.model.RepartitionClientAction;
-import web.model.RepartitionEmployeAction;
-import web.model.TerminerConsultationAction;
+import web.model.RegisterAction;
+import web.model.SortedMediumListAction;
+import web.model.StartConsultationAction;
 import web.model.TopMediumAction;
-import web.vue.ConnexionSerialisation;
+import web.vue.AppointmentSerialisation;
+import web.vue.ClientDistributionSerialisation;
+import web.vue.ClientListSerialisation;
+import web.vue.ConsultationListSerialisation;
 import web.vue.CurrentConsultationSerialisation;
-import web.vue.MediumSerialisation;
+import web.vue.EmployeeDistributionSerialisation;
 import web.vue.IndividuSerialisation;
-import web.vue.InscriptionSerialisation;
-import web.vue.ListeClientSerialisation;
-import web.vue.ListeConsultationSerialisation;
-import web.vue.ListeMediumSerialisation;
+import web.vue.LoginSerialisation;
+import web.vue.MediumListSerialisation;
+import web.vue.MediumSerialisation;
 import web.vue.PredictionSerialisation;
-import web.vue.PrendreRendezvousSerialisation;
-import web.vue.RepartitionClientSerialisation;
-import web.vue.RepartitionEmployeSerialisation;
+import web.vue.RegisterSerialisation;
 
 /**
  *
  * @author ypeyrot
  */
-@WebServlet(name = "ActionServlet", urlPatterns = {"/ActionServlet"})
+@WebServlet(name = "ActionServlet", urlPatterns = { "/ActionServlet" })
 public class ActionServlet extends HttpServlet {
 
     @Override
@@ -55,21 +55,21 @@ public class ActionServlet extends HttpServlet {
             return;
         }
         Service service = new Service();
-        //service.initialisationBD();
+        // service.initialisationBD();
         switch (todo) {
             case "connected":
                 new ConnectedAction(service).execute(req);
-                new ConnexionSerialisation().apply(req, res);
+                new LoginSerialisation().apply(req, res);
                 break;
-            case "accueil_liste_medium":
-                new AccueilListeMediumAction(service).execute(req);
-                new ListeMediumSerialisation().apply(req, res);
+            case "medium_list":
+                new MediumListAction(service).execute(req);
+                new MediumListSerialisation().apply(req, res);
                 break;
-            case "infos_medium":
-                new InfosMediumAction(service).execute(req);
+            case "medium_infos":
+                new MediumInfosAction(service).execute(req);
                 new MediumSerialisation().apply(req, res);
                 break;
-            case "infos_page_employee":
+            case "employee_page_infos":
                 new CurrentConsultationAction(service).execute(req);
                 new CurrentConsultationSerialisation().apply(req, res);
                 break;
@@ -77,47 +77,47 @@ public class ActionServlet extends HttpServlet {
                 new PredictionAction(service).execute(req);
                 new PredictionSerialisation().apply(req, res);
                 break;
-            case "historique_client":
-                new HistoriqueClientAction(service).execute(req);
-                new ListeConsultationSerialisation().apply(req, res);
+            case "client_history":
+                new ClientHistoryAction(service).execute(req);
+                new ConsultationListSerialisation().apply(req, res);
                 break;
             case "top_medium":
                 new TopMediumAction(service).execute(req);
-                new ListeMediumSerialisation().apply(req, res);
+                new MediumListSerialisation().apply(req, res);
                 break;
-            case "liste_clients_contenant":
-                new ListeClientsContenantAction(service).execute(req);
-                new ListeClientSerialisation().apply(req, res);
+            case "client_list_search":
+                new ClientListSearchAction(service).execute(req);
+                new ClientListSerialisation().apply(req, res);
                 break;
-            case "commencer_consultation":
-                new CommencerConsultationAction(service).execute(req);
+            case "start_consultation":
+                new StartConsultationAction(service).execute(req);
                 break;
-            case "terminer_consultation":
-                new TerminerConsultationAction(service).execute(req);
+            case "end_consultation":
+                new EndConsultationAction(service).execute(req);
                 break;
-            case "repartition_employe":
-                new RepartitionEmployeAction(service).execute(req);
-                new RepartitionEmployeSerialisation().apply(req, res);
+            case "employee_distribution":
+                new EmployeeDistributionAction(service).execute(req);
+                new EmployeeDistributionSerialisation().apply(req, res);
                 break;
-            case "repartition_client":
-                new RepartitionClientAction(service).execute(req);
-                new RepartitionClientSerialisation().apply(req, res);
+            case "client_distribution":
+                new ClientDistributionAction(service).execute(req);
+                new ClientDistributionSerialisation().apply(req, res);
                 break;
-            case "liste_medium_ordonnee":
-                new ListeMediumOrdonneeAction(service).execute(req);
-                new ListeMediumSerialisation().apply(req, res);
+            case "sorted_medium_list":
+                new SortedMediumListAction(service).execute(req);
+                new MediumListSerialisation().apply(req, res);
                 break;
-            case "prendre_rendez_vous":
-                new PrendreRendezvousAction(service).execute(req);
-                new PrendreRendezvousSerialisation().apply(req, res);
+            case "appointment":
+                new AppointmentAction(service).execute(req);
+                new AppointmentSerialisation().apply(req, res);
                 break;
-            case "connexion":
-                new ConnexionAction(service).execute(req);
+            case "login":
+                new LoginAction(service).execute(req);
                 new IndividuSerialisation().apply(req, res);
                 break;
-            case "inscription":
-                new InscriptionAction(service).execute(req);
-                new InscriptionSerialisation().apply(req, res);
+            case "register":
+                new RegisterAction(service).execute(req);
+                new RegisterSerialisation().apply(req, res);
                 break;
             default:
                 break;
@@ -126,14 +126,14 @@ public class ActionServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init(); //To change body of generated methods, choose Tools | Templates.
+        super.init(); // To change body of generated methods, choose Tools | Templates.
         JpaUtil.creerFabriquePersistance();
     }
 
     @Override
     public void destroy() {
         JpaUtil.fermerFabriquePersistance();
-        super.destroy(); //To change body of generated methods, choose Tools | Templates.
+        super.destroy(); // To change body of generated methods, choose Tools | Templates.
     }
 
 }

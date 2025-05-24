@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class PrendreRendezvousSerialisation extends Serialisation {
+public class AppointmentSerialisation extends Serialisation {
     @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;

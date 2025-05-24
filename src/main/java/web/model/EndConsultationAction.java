@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import metier.modele.Consultation;
 import metier.service.Service;
 
-public class TerminerConsultationAction extends Action {
-    public TerminerConsultationAction(Service service) {
+public class EndConsultationAction extends Action {
+    public EndConsultationAction(Service service) {
         super(service);
     }
 

@@ -6,8 +6,8 @@ import metier.service.Service;
 
 import com.google.maps.model.LatLng;
 
-public class RepartitionClientAction extends Action {
-    public RepartitionClientAction(Service service) {
+public class ClientDistributionAction extends Action {
+    public ClientDistributionAction(Service service) {
         super(service);
     }
 

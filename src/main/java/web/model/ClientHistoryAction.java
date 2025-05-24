@@ -16,9 +16,9 @@ import metier.service.Service;
  *
  * @author ypeyrot
  */
-public class HistoriqueClientAction extends Action {
+public class ClientHistoryAction extends Action {
 
-    public HistoriqueClientAction(Service service) {
+    public ClientHistoryAction(Service service) {
         super(service);
     }
 

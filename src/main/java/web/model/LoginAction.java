@@ -14,9 +14,9 @@ import metier.service.Service;
  *
  * @author ypeyrot
  */
-public class ConnexionAction extends Action {
+public class LoginAction extends Action {
 
-    public ConnexionAction(Service service) {
+    public LoginAction(Service service) {
         super(service);
     }
 

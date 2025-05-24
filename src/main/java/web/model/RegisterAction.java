@@ -18,9 +18,9 @@ import metier.service.Service;
  *
  * @author ypeyrot
  */
-public class InscriptionAction extends Action {
+public class RegisterAction extends Action {
 
-    public InscriptionAction(Service service) {
+    public RegisterAction(Service service) {
         super(service);
     }
 
