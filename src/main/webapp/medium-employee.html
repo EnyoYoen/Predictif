@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="style/global.css" />
     <link rel="stylesheet" type="text/css" href="style/medium.css" />
 
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -28,7 +30,7 @@
                     if (response == null || response.connected == null || response.connected == false || response.type != "employee") {
                         window.location = "index.html";
                     } else {
-                        $("#return").on("click", function () {
+                        $("#back-button").on("click", function () {
                             window.location = "employee.html"
                         });
                         $.ajax({
@@ -41,15 +43,18 @@
                             dataType: 'json'
                         })
                             .done(function (response) {
-                                $("#name").text("Nom : " + response.medium.denomination);
-                                $("#description").text("Description : " + response.medium.description);
-                                $("#type").text("Type : " + response.class);
+                                $("#name").text(response.medium.denomination);
+                                $("#description").text("\"" + response.medium.description + "\"");
+                                $("#type").text(response.class);
                                 if (response.class == "Spirite") {
                                     $("#info1").text(response.medium.support);
+                                    $("#info1").removeAttr("hidden");
                                 }
                                 else if (response.class == "Astrologue") {
                                     $("#info1").text(response.medium.formation);
                                     $("#info2").text(response.medium.promotion);
+                                    $("#info1").removeAttr("hidden");
+                                    $("#info2").removeAttr("hidden");
                                 }
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
@@ -67,13 +72,20 @@
 <body>
     <h1 id="title">Informations sur le medium</h1>
     <div id="medium">
-        <p id="name">Nom : </p>
-        <p id="description">Description : </p>
-        <p id="type">Type : </p>
-        <p id="info1"></p>
-        <p id="info2"></p>
+        <div id="medium-infos">
+            <div id="medium-image-name">
+                <img id="medium-image" src="images/medium.png" alt="Medium" />
+                <p id="name"></p>
+            </div>
+            <p id="description"></p>  
+        </div>
+        <p id="type"></p>
+        <ul>
+            <li id="info1" hidden></li>
+            <li id="info2" hidden></li>
+        </ul>
     </div>
-    <input name="Retour" type="button" id="return" value="Retour" />
+    <input name="Retour" type="button" id="back-button" value="Retour" />
 </body>
 
 </html>

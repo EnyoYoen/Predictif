@@ -3,8 +3,12 @@
     src: url("../fonts/Mistic.ttf");
 }
 
-html,
-body {
+@font-face {
+    font-family: Mostical;
+    src: url("../fonts/Mostical.ttf");
+}
+
+html, body {
     height: 100%;
     margin: 0px 0px;
     padding: 0;
@@ -14,7 +18,24 @@ body {
 
 #title {
     font-family: Mistic;
-    font-size: xx-large;
+    font-size: 3em;
     margin: 0;
     text-align: center;
+}
+
+#back-button {
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Mostical;
+    font-size: 1.2em;
+    background-color: rgb(209, 209, 209);
+    border: 1px solid #919191;
+    color: #000;
+}
+
+#back-button:hover {
+    background-color: #e6e6e6;
 }
