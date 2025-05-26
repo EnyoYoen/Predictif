@@ -34,6 +34,7 @@ import web.vue.ClientListSerialisation;
 import web.vue.ConsultationListSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.EmployeeDistributionSerialisation;
+import web.vue.ErrorSerialisation;
 import web.vue.IndividuSerialisation;
 import web.vue.LoginSerialisation;
 import web.vue.MediumListSerialisation;
@@ -91,9 +92,11 @@ public class ActionServlet extends HttpServlet {
                 break;
             case "start_consultation":
                 new StartConsultationAction(service).execute(req);
+                new ErrorSerialisation().apply(req, res);
                 break;
             case "end_consultation":
                 new EndConsultationAction(service).execute(req);
+                new ErrorSerialisation().apply(req, res);
                 break;
             case "employee_distribution":
                 new EmployeeDistributionAction(service).execute(req);

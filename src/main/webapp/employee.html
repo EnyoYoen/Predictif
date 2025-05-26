@@ -40,8 +40,20 @@
                         })
                             .done(function (response) {
                                 client = response.client;
-                                consultation = response.consultation;
                                 medium = response.medium;
+
+                                let nextConsultation = $("#nextConsultation");
+                                nextConsultation.append("<p>Nom : " + client.nom + "</p>");
+                                nextConsultation.append("<p>Prénom : " + client.prenom + "</p>");
+                                nextConsultation.append("<p>Date de naissance : " + client.dateNaissance + "</p>");
+                                nextConsultation.append("<p>Profil Astral : </p>");
+                                let listeAstral = $("#consultatioAstral");
+                                listeAstral.append("<li>Signe du zodiaque : " + client.profilAstral.signeZodiaque + "</li>");
+                                listeAstral.append("<li>Signe astrologique chinois : " + client.profilAstral.signeChinois + "</li>");
+                                listeAstral.append("<li>Couleur porte bonheur : " + client.profilAstral.couleur + "</li>");
+                                listeAstral.append("<li>Animal totem : " + client.profilAstral.animal + "</li>");
+
+                                $("#mediumName").text("Medium à incarner : " + medium.denomination);
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
                                 console.error("Error during AJAX request: " + textStatus, errorThrown);
@@ -85,7 +97,11 @@
                                     dataType: 'json'
                                 })
                                     .done(function (response) {
-
+                                        let predictions = $("#predictions");
+                                        predictions.empty();
+                                        predictions.append("<p>Amour : " + response.predi_love + "</p>");
+                                        predictions.append("<p>Santé : " + response.predi_health + "</p>");
+                                        predictions.append("<p>Travail : " + response.predi_work + "</p>");
                                     })
                                     .fail(function (jqXHR, textStatus, errorThrown) {
                                         console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -101,8 +117,12 @@
                                 },
                                 dataType: 'json'
                             })
-                                .done(function () {
-
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        alert("Consultation commencée avec succès !");
+                                    }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
                                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -119,8 +139,12 @@
                                 },
                                 dataType: 'json'
                             })
-                                .done(function () {
-
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        alert("Consultation terminée avec succès !");
+                                    }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
                                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -194,16 +218,13 @@
     <br />
     <h2>Prochaine consultation</h2>
     <br />
-    <span id="clientName"></span>
-    <br />
-    <span id="clientFirstName"></span>
-    <br />
-    <span id="clientBirthDay"></span>
-    <br />
-    <p>Profil Astral</p>
-    <ul id="clientProfile">
+    <div id="nextConsultation">
+        <ul id="consultatioAstral">
 
-    </ul>
+        </ul>
+    </div>
+    <br />
+    <p id="mediumName"></p>
 
     <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
     <br />
@@ -224,6 +245,9 @@
     <br />
     <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
     <br />
+    <div id="predictions">
+
+    </div>
     <input name="ready" type="button" id="ready" value="Prêt" />
     <br />
     <input name="end" type="button" id="end" value="Terminer" />
