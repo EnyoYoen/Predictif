@@ -1,0 +1,22 @@
+#header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(190, 190, 190);
+    padding: 8px;
+    font-size: x-large;
+    text-align: center;
+}
+
+.input_field {
+    width: 20%;
+    padding: 7px 5px;
+    margin: 8px 0px;
+    align-self: center;
+}
+
+#inscription {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

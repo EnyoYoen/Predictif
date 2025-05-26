@@ -56,30 +56,40 @@
 </head>
 
 <body>
-    <h1>Inscription</h1>
-    <br />
-    Adresse mail : <input name="email" type="text" id="mail" value="" />
-    <br /><br />
-    Mot de passe : <input name="password" type="password" id="password" value="" />
-    <br /><br />
-    Confirmation du mot de passe : <input name="cpassword" type="password" id="cpassword" value="" />
-    <br /><br />
-    Nom : <input name="lastname" type="text" id="lastname" value="" />
-    <br /><br />
-    Prenom : <input name="firstname" type="text" id="firstname" value="" />
-    <br /><br />
-    Telephone : <input name="phone" type="text" id="phone" value="" />
-    <br /><br />
-    Adresse : <input name="address" type="text" id="address" value="" />
-    <br /><br />
-    Date de naissance : <input type="date" id="birthdate" name="birthdate">
-    <br /><br />
-    Genre : <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
-    <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
-    <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
-    <br /><br />
-    <span id="fill_fields" style="color: red"></span>
-    <input name="signin" type="button" id="signin" value="Inscription" />
+    <header>
+        <div id="header-container">
+            Inscription
+        </div>
+    </header>
+    <div id="inscription">
+        <br />
+        Adresse mail : <input class="input_field" name="email" type="text" id="mail" value="" />
+
+        Mot de passe : <input class="input_field" name="password" type="password" id="password" value="" />
+
+        Confirmation du mot de passe : <input class="input_field" name="cpassword" type="password" id="cpassword"
+            value="" />
+
+        Nom : <input class="input_field" name="lastname" type="text" id="lastname" value="" />
+
+        Prenom : <input class="input_field" name="firstname" type="text" id="firstname" value="" />
+
+        Telephone : <input class="input_field" name="phone" type="text" id="phone" value="" />
+
+        Adresse : <input class="input_field" name="address" type="text" id="address" value="" />
+
+        Date de naissance : <input class="input_field" type="date" id="birthdate" name="birthdate">
+        <div>
+            Genre :
+
+            <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
+            <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
+            <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
+        </div>
+        <br />
+        <span id="fill_fields" style="color: red"></span>
+        <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
+    </div>
 </body>
 
 </html>

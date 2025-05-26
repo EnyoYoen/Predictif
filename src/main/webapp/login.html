@@ -48,15 +48,24 @@
 </head>
 
 <body>
-    <h1>Connexion</h1>
+    <header>
+        <div id="header-container">
+            Connexion
+        </div>
+    </header>
     <br />
-    Adresse mail : <input name="mail" type="text" id="mail" value="" />
-    <br /><br />
-    Mot de passe : <input name="password" type="password" id="password" value="" />
-    <br /><br />
-    <input name="Connexion" type="button" id="login" value="Connexion" />
-    <br /><br />
-    <input name="Inscription" type="button" id="signin" value="Inscription" />
+    <div id="connexion">
+        Adresse mail : <input class="input_field" name=" mail" type="text" id="mail" value="" />
+
+        Mot de passe : <input class="input_field" name="password" type="password" id="password" value="" />
+
+        <input class="input_field" name="Connexion" type="button" id="login" value="Connexion" />
+        <div>
+            Pas de compte ?
+            <a href="register.html">Créer un compte</a>
+        </div>
+
+    </div>
 </body>
 
 </html>
