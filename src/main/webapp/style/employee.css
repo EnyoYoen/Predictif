@@ -1,3 +1,12 @@
+html,
+body {
+    height: 100%;
+    margin: 0px 0px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 #content {
     display: flex;
     flex-direction: row;
@@ -34,7 +43,10 @@
     align-self: center;
 }
 
-.radio_buttons {}
+.radio_buttons {
+    padding: 7px 5px;
+    margin: 8px 8px;
+}
 
 #commentary {
     padding: 7px 5px;

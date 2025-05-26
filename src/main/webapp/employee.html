@@ -215,7 +215,11 @@
 </head>
 
 <body>
-    <header id="header-container">Espace consultation</header>
+    <header>
+        <div>
+            <a href="index.html">Déconnexion</a>
+        </div>
+    </header>
     <div id="content">
         <div id="consultation-space">
             <h2>Prochaine consultation</h2>
@@ -265,10 +269,7 @@
                     placeholder="Ajoutez des commentaires avant de finir la consultation" />
             </div>
 
-            <div id="ready-buttons">
-                <input class="ready-check" name="ready" type="button" id="ready" value="Prêt" />
-                <input class="ready-check" name="end" type="button" id="end" value="Terminer" />
-            </div>
+
 
 
         </div>
@@ -281,21 +282,25 @@
             <input class="input_field" name="Voir plus" type="button" id="see-more" value="Voir plus" />
 
             <p>Répartition des clients par employé</p>
-            <p>Rechercher par nom</p>
-            <input class="input_field" type="text" id="search" />
+            <div>
+                Rechercher par nom :
+                <input class="input_field" type="text" id="search" />
+            </div>
             <input class="input_field" name="search" type="button" id="searchButton" value="Rechercher" />
 
             <ul id="search-results">
 
             </ul>
 
-            <input class="input_field" name="map" type="button" id="map" value="Carte des clients" />
-            <br />
 
-            <input class="input_field" name="back" type="button" id="back" value="Retour" />
-            <br />
+
         </div>
     </div>
+    <div id="ready-buttons">
+        <input class="ready-check" name="ready" type="button" id="ready" value="Prêt" />
+        <input class="ready-check" name="end" type="button" id="end" value="Terminer" />
+        <input class="ready-check" name="map" type="button" id="map" value="Carte des clients" />
+        <input class="ready-check" name="back" type="button" id="back" value="Retour" />
     </div>
 </body>
 
