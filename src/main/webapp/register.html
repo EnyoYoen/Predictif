@@ -57,12 +57,14 @@
 
 <body>
     <header>
-        <div id="header-container">
-            Inscription
+        <div id="index-text">
+            <a href="index.html">Retour accueil</a>
         </div>
     </header>
     <div id="inscription">
-        <br />
+        <h1>
+            Inscription
+        </h1>
         Adresse mail : <input class="input_field" name="email" type="text" id="mail" value="" />
 
         Mot de passe : <input class="input_field" name="password" type="password" id="password" value="" />
@@ -72,23 +74,29 @@
 
         Nom : <input class="input_field" name="lastname" type="text" id="lastname" value="" />
 
-        Prenom : <input class="input_field" name="firstname" type="text" id="firstname" value="" />
+        Prénom : <input class="input_field" name="firstname" type="text" id="firstname" value="" />
 
-        Telephone : <input class="input_field" name="phone" type="text" id="phone" value="" />
+        Téléphone : <input class="input_field" name="phone" type="text" id="phone" value="" />
 
         Adresse : <input class="input_field" name="address" type="text" id="address" value="" />
 
         Date de naissance : <input class="input_field" type="date" id="birthdate" name="birthdate">
-        <div>
+        <div id="genders">
             Genre :
 
             <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
             <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
             <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
         </div>
-        <br />
+
         <span id="fill_fields" style="color: red"></span>
         <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
+        <div>
+            <a href="login.html">
+                J'ai déja un compte
+            </a>
+        </div>
+
     </div>
 </body>
 
