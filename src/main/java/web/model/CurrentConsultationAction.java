@@ -31,16 +31,14 @@ public class CurrentConsultationAction extends Action {
             if (cons != null) {
                 Client client = cons.getClient();
                 Medium medium = cons.getMedium();
-                request.setAttribute("consultation", cons);
                 request.setAttribute("client", client);
                 request.setAttribute("medium", medium);
+                request.getSession().setAttribute("consultation", cons);
             } else {
-                request.setAttribute("consultation", null);
                 request.setAttribute("client", null);
                 request.setAttribute("medium", null);
             }
         } else {
-            request.setAttribute("consultation", null);
             request.setAttribute("client", null);
             request.setAttribute("medium", null);
         }

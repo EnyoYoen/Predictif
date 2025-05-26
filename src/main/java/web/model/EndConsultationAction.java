@@ -11,14 +11,20 @@ public class EndConsultationAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request) {
-        String consultationId = request.getParameter("consultationId");
-        String comment = request.getParameter("comment");
         try {
-            Long id = Long.parseLong(consultationId);
-            Consultation consultation = service.findConsultationById(id);
-            service.validerConsultation(consultation, comment);
+            Consultation consultation = (Consultation) request.getSession().getAttribute("consultation");
+            Long consEmpId = consultation.getEmploye().getId();
+            Long indId = (Long) request.getSession().getAttribute("id");
+            String comment = request.getParameter("comment");
+            if (indId == null || consEmpId == null || !indId.equals(consEmpId)) {
+                request.setAttribute("error", indId == null ? "Non connecté" : consEmpId == null ? "Vous n'êtes pas employé" : "Vous ne pouvez pas démarrer cette consultation");
+            } else {
+                service.validerConsultation(consultation, comment);
+                request.getSession().setAttribute("consultation", null);
+                request.setAttribute("error", false);
+            }
         } catch (Exception e) {
-
+            request.setAttribute("error", "Pas de consultation en cours");
         }
     }
 }

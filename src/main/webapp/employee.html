@@ -40,8 +40,20 @@
                         })
                             .done(function (response) {
                                 client = response.client;
-                                consultation = response.consultation;
                                 medium = response.medium;
+
+                                let nextConsultation = $("#nextConsultation");
+                                nextConsultation.append("<p>Nom : " + client.nom + "</p>");
+                                nextConsultation.append("<p>Prénom : " + client.prenom + "</p>");
+                                nextConsultation.append("<p>Date de naissance : " + client.dateNaissance + "</p>");
+                                nextConsultation.append("<p>Profil Astral : </p>");
+                                let listeAstral = $("#consultatioAstral");
+                                listeAstral.append("<li>Signe du zodiaque : " + client.profilAstral.signeZodiaque + "</li>");
+                                listeAstral.append("<li>Signe astrologique chinois : " + client.profilAstral.signeChinois + "</li>");
+                                listeAstral.append("<li>Couleur porte bonheur : " + client.profilAstral.couleur + "</li>");
+                                listeAstral.append("<li>Animal totem : " + client.profilAstral.animal + "</li>");
+
+                                $("#mediumName").text("Medium à incarner : " + medium.denomination);
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
                                 console.error("Error during AJAX request: " + textStatus, errorThrown);
@@ -85,7 +97,11 @@
                                     dataType: 'json'
                                 })
                                     .done(function (response) {
-
+                                        let predictions = $("#predictions");
+                                        predictions.empty();
+                                        predictions.append("<p>Amour : " + response.predi_love + "</p>");
+                                        predictions.append("<p>Santé : " + response.predi_health + "</p>");
+                                        predictions.append("<p>Travail : " + response.predi_work + "</p>");
                                     })
                                     .fail(function (jqXHR, textStatus, errorThrown) {
                                         console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -101,8 +117,12 @@
                                 },
                                 dataType: 'json'
                             })
-                                .done(function () {
-
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        alert("Consultation commencée avec succès !");
+                                    }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
                                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -119,8 +139,12 @@
                                 },
                                 dataType: 'json'
                             })
-                                .done(function () {
-
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        alert("Consultation terminée avec succès !");
+                                    }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
                                     console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
@@ -190,77 +214,68 @@
 </head>
 
 <body>
-    <header id="header-container">Espace consultation</header>
-    <div id="content">
-        <div id="consultation-space">
-            <h2>Prochaine consultation</h2>
-            <br />
-            <span id="clientName"></span>
-            <br />
-            <span id="clientFirstName"></span>
-            <br />
-            <span id="clientBirthDay"></span>
-            <br />
-            <p>Profil Astral</p>
-            <ul id="clientProfile">
+    <h1>Espace consultation</h1>
+    <br />
+    <h2>Prochaine consultation</h2>
+    <br />
+    <div id="nextConsultation">
+        <ul id="consultatioAstral">
 
-            </ul>
+        </ul>
+    </div>
+    <br />
+    <p id="mediumName"></p>
 
-            <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
-            <br />
-            Générateur de prédictions
-            <div>
-                Amour : <input type="radio" id="love1" name="love" value="1" checked><label for="love1">1</label>
-                <input type="radio" id="love2" name="love" value="2"><label for="love2">2</label>
-                <input type="radio" id="love3" name="love" value="3"><label for="love3">3</label>
-                <input type="radio" id="love4" name="love" value="4"><label for="love4">4</label>
-            </div>
-            <br />
-            <div>
-                Sante : <input type="radio" id="health1" name="health" value="1" checked><label for="health1">1</label>
-                <input type="radio" id="health2" name="health" value="2"><label for="health2">2</label>
-                <input type="radio" id="health3" name="health" value="3"><label for="health3">3</label>
-                <input type="radio" id="health4" name="health" value="4"><label for="health4">4</label>
-            </div>
-            <br />
-            <div>
-                Travail : <input type="radio" id="work1" name="work" value="1" checked><label for="work1">1</label>
-                <input type="radio" id="work2" name="work" value="2"><label for="work2">2</label>
-                <input type="radio" id="work3" name="work" value="3"><label for="work3">3</label>
-                <input type="radio" id="work4" name="work" value="4"><label for="work4">4</label>
-            </div>
-            <br />
-            <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
-            <br />
-            <input name="ready" type="button" id="ready" value="Prêt" />
-            <br />
-            <input name="end" type="button" id="end" value="Terminer" />
-        </div>
+    <input name="clientHistory" type="button" id="clientHistory" value="Consulter l'historique du client" />
+    <br />
+    Amour : <input type="radio" id="love1" name="love" value="1" checked><label for="love1">1</label>
+    <input type="radio" id="love2" name="love" value="2"><label for="love2">2</label>
+    <input type="radio" id="love3" name="love" value="3"><label for="love3">3</label>
+    <input type="radio" id="love4" name="love" value="4"><label for="love4">4</label>
+    <br />
+    Sante : <input type="radio" id="health1" name="health" value="1" checked><label for="health1">1</label>
+    <input type="radio" id="health2" name="health" value="2"><label for="health2">2</label>
+    <input type="radio" id="health3" name="health" value="3"><label for="health3">3</label>
+    <input type="radio" id="health4" name="health" value="4"><label for="health4">4</label>
+    <br />
+    Travail : <input type="radio" id="work1" name="work" value="1" checked><label for="work1">1</label>
+    <input type="radio" id="work2" name="work" value="2"><label for="work2">2</label>
+    <input type="radio" id="work3" name="work" value="3"><label for="work3">3</label>
+    <input type="radio" id="work4" name="work" value="4"><label for="work4">4</label>
+    <br />
+    <input name="predictionGenerator" type="button" id="predGen" value="Generer les predictions" />
+    <br />
+    <div id="predictions">
 
-        <div id="stats">
-            <h1>Statistiques</h1>
-            <p>Top 5 des mediums</p>
-            <ul id="medium-list">
-                <li></li>
-            </ul>
+    </div>
+    <input name="ready" type="button" id="ready" value="Prêt" />
+    <br />
+    <input name="end" type="button" id="end" value="Terminer" />
 
-            <input name="Voir plus" type="button" id="see-more" value="Voir plus" />
+    <div id="stats">
+        <h1>Statistiques</h1>
+        <p>Top 5 des mediums</p>
+        <ul id="medium-list">
+            <li></li>
+        </ul>
 
-            <p>Répartition des clients par employé</p>
-            <p>Rechercher par nom</p>
-            <input type="text" id="search" />
-            <input name="search" type="button" id="searchButton" value="Rechercher" />
+        <input name="Voir plus" type="button" id="see-more" value="Voir plus" />
 
-            <ul id="search-results">
-                <li></li>
-            </ul>
+        <p>Répartition des clients par employé</p>
+        <p>Rechercher par nom</p>
+        <input type="text" id="search" />
+        <input name="search" type="button" id="searchButton" value="Rechercher" />
 
-            <input name="map" type="button" id="map" value="Carte des clients" />
-            <br />
+        <ul id="search-results">
+            <li></li>
+        </ul>
 
-            <input name="back" type="button" id="back" value="Retour" />
-            <br />
-        </div>
+        <input name="map" type="button" id="map" value="Carte des clients" />
+        <br />
+
+        <input name="back" type="button" id="back" value="Retour" />
+        <br />
+    </div>
     </div>
 </body>
 
