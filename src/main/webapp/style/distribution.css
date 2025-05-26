@@ -1,0 +1,11 @@
+#title {
+    font-family: Mistic;
+    font-size: xx-large;
+    margin: 0;
+    text-align: center;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}

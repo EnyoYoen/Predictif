@@ -11,3 +11,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+#title {
+    font-family: Mistic;
+    font-size: xx-large;
+    margin: 0;
+    text-align: center;
+}

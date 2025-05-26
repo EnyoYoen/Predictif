@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="style/global.css" />
     <link rel="stylesheet" type="text/css" href="style/distribution.css" />
 
+    <link rel="icon" type="image/png" href="icon.png" />
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -54,9 +56,25 @@
             });
         });
     </script>
+
+    <!--<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwi36JczYn0D-logG2m3-ns-Cnt7u_8s&callback=initMap">
+    </script>
+    <script>
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 48.8566, lng: 2.3522 }, // Paris as default center
+                zoom: 6,
+            });
+        }
+    </script>-->
 </head>
 
 <body>
+    <h1 id="title">Localisation des clients</h1>
+    <div id="map"></div>
     <input type="button" id="back" value="Retour" />
 </body>
 
