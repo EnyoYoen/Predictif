@@ -34,8 +34,21 @@
     align-self: center;
 }
 
-#connexion {
+.radio_buttons {}
+
+#commentary {
+    padding: 7px 5px;
+    margin: 8px 0px;
+    width: 40%
+}
+
+#ready-buttons {
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+}
+
+.ready-check {
+    width: 45%;
+    padding: 7px 5px;
+    margin: 0 2.5%;
 }
