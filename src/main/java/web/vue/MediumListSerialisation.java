@@ -5,6 +5,8 @@
  */
 package web.vue;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -29,7 +31,33 @@ public class MediumListSerialisation {
         }
         response.setContentType("application/json;charset=UTF-8");
 
+        final boolean vueIndex = request.getAttribute("vue") == null || request.getAttribute("vue").equals("index");
+
         GsonBuilder builder = new GsonBuilder();
+
+        builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                boolean result = false;
+                if (vueIndex) {
+                    result = f.getName().equals("photoDeProfil") ||
+                        f.getName().equals("genre") || f.getName().equals("nbConsultations") ||
+                        f.getName().equals("formation")  || f.getName().equals("promotion") || 
+                        f.getName().equals("support");
+                } else {
+                    result = f.getName().equals("description") ||
+                        f.getName().equals("genre") || f.getName().equals("formation") || 
+                        f.getName().equals("promotion") || f.getName().equals("support");
+                }
+                return result;
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+        });
+
         Gson gson = builder.create();
         String json = gson.toJson(request.getAttribute("mediumList"));
 

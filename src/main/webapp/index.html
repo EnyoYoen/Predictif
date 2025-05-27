@@ -76,9 +76,17 @@
                             window.location = "medium.html?mediumId=" + medium.id;
                         });
                     }
+                    if (liste.length == 0) {
+                        $("#mediums-empty").removeAttr("hidden");
+                    } else {
+                        $("#mediums-content").removeAttr("hidden");
+                    }
+                    $("#mediums-container").removeClass("loading");
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("Error during AJAX request: " + textStatus, errorThrown);
+                    $("#mediums-error").removeAttr("hidden");
+                    $("#mediums-container").removeClass("loading");
                 });
         });
     </script>
@@ -105,10 +113,14 @@
 
         </div>
 
-        <div id="mediums-container">
-            <h3 id="mediums-title">Nos médiums</h3>
-            <div id="medium-list">
+        <div id="mediums-container" class="loading">
+            <p id="mediums-empty" hidden>Liste de mediums vides.</p>
+            <p id="mediums-error" hidden>Erreur lors du chargement des mediums.</p>
+            <div id="mediums-content" hidden>
+                <h3 id="mediums-title">Nos médiums</h3>
+                <div id="medium-list">
 
+                </div>
             </div>
         </div>
     </div>

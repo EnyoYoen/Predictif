@@ -15,5 +15,6 @@ public class TopMediumAction extends Action {
     public void execute(HttpServletRequest request) {
         List<Medium> mediumList = service.getTop5Mediums();
         request.setAttribute("mediumList", mediumList);
+        request.setAttribute("vue", "employee");
     }
 }

@@ -5,6 +5,8 @@
  */
 package web.vue;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -48,6 +50,19 @@ public class MediumSerialisation {
         data.put("class", type);
 
         GsonBuilder builder = new GsonBuilder();
+
+        builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                return f.getName().equals("genre") || f.getName().equals("nbConsultations");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+        });
+
         Gson gson = builder.create();
         String json = gson.toJson(data);
 

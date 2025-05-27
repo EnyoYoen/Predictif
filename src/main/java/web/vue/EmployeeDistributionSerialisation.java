@@ -33,7 +33,12 @@ public class EmployeeDistributionSerialisation {
         builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("historique") || f.getName().equals("consultationEnCours");
+                return f.getName().equals("adresse") || f.getName().equals("numeroTel")
+                        || f.getName().equals("mail") || f.getName().equals("genre")
+                        || f.getName().equals("mdp") || f.getName().equals("historique")
+                        || f.getName().equals("dateNaissance") || f.getName().equals("profilAstral")
+                        || f.getName().equals("nbConsultations") || f.getName().equals("id")
+                        || f.getName().equals("consultationEnCours");
             }
 
             @Override
@@ -41,6 +46,7 @@ public class EmployeeDistributionSerialisation {
                 return false;
             }
         });
+
         Gson gson = builder.create();
         String json = gson.toJson(data);
 

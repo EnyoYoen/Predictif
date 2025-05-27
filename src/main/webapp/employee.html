@@ -63,6 +63,11 @@
 
                                     $("#mediumName").text("Medium à incarner : " + medium.denomination);
 
+
+                                    $("#clientHistory").on("click", function () {
+                                        window.location = "client-history-employee.html?clientId=" + client.id;
+                                    });
+
                                     $("#consultation-loading-box").removeClass("loading");
                                     $("#consultation-space-content").removeAttr("hidden");
                                     $("#ready").removeAttr("hidden");
@@ -108,9 +113,6 @@
                                 $("#top-mediums-loading-box").removeClass("loading");
                                 $("#top-mediums-error").removeAttr("hidden");
                             });
-                        $("#clientHistory").on("click", function () {
-                            window.location = "client-history-employee.html"
-                        });
                         $("#predGen").on("click", function () {
                             if (client != null) {
                                 $("#predictions").removeAttr("hidden");

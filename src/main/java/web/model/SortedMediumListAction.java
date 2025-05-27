@@ -15,5 +15,6 @@ public class SortedMediumListAction extends Action {
     public void execute(HttpServletRequest request) {
         List<Medium> mediumList = service.getOrderedListMediums();
         request.setAttribute("mediumList", mediumList);
+        request.setAttribute("vue", "employee");
     }
 }

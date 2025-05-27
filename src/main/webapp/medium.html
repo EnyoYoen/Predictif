@@ -69,10 +69,13 @@
                                 $("#type").text(response.class);
                                 if (response.class == "Spirite") {
                                     $("#info1").text(response.medium.support);
+                                    $("#info1").removeAttr("hidden");
                                 }
                                 else if (response.class == "Astrologue") {
                                     $("#info1").text(response.medium.formation);
                                     $("#info2").text(response.medium.promotion);
+                                    $("#info1").removeAttr("hidden");
+                                    $("#info2").removeAttr("hidden");
                                 }
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {

@@ -50,7 +50,12 @@ public class CurrentConsultationSerialisation {
         builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("historique") || f.getName().equals("consultationEnCours");
+                return f.getName().equals("adresse") || f.getName().equals("numeroTel")
+                        || f.getName().equals("mail") || f.getName().equals("genre")
+                        || f.getName().equals("mdp") || f.getName().equals("formation")
+                        || f.getName().equals("promotion") || f.getName().equals("description")
+                        || f.getName().equals("photoDeProfil") || f.getName().equals("nbConsultations")
+                        || f.getName().equals("historique");
             }
 
             @Override

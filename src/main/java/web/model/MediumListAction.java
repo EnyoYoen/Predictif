@@ -23,5 +23,6 @@ public class MediumListAction extends Action {
     public void execute(HttpServletRequest request) {
         List<Medium> mediumList = service.getListeMediums();
         request.setAttribute("mediumList", mediumList);
+        request.setAttribute("vue", "index");
     }
 }
