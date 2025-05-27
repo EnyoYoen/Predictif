@@ -26,7 +26,7 @@
                     dataType: 'json'
                 })
                     .done(function (response) {
-                        if (response.etat == "employe") {
+                        if (response.etat == "employee") {
                             window.location = "employee.html";
                         }
                         else if (response.etat == "client") {
@@ -58,13 +58,13 @@
         <h1>
             Connexion
         </h1>
-        Adresse mail : <input class="input_field" name=" mail" type="text" id="mail" value="" />
+        <p>Adresse mail : </p><input class="input_field" name=" mail" type="text" id="mail" value="" />
 
-        Mot de passe : <input class="input_field" name="password" type="password" id="password" value="" />
+        <p>Mot de passe : </p><input class="input_field" name="password" type="password" id="password" value="" />
 
         <input class="input_field" name="Connexion" type="button" id="login" value="Connexion" />
         <div>
-            Pas de compte ?
+            <p>Pas de compte ?</p>
             <a href="register.html">Créer un compte</a>
         </div>
 

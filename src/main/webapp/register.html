@@ -28,7 +28,7 @@
                             phone: $('#phone').val(),
                             address: $('#address').val(),
                             birthdate: $('#birthdate').val(),
-                            gender: $('input[type=radio][name=gender]:checked').val()
+                            gender: $('#man').is(':checked') ? "Homme" : $('#woman').is(':checked') ? "Femme" : "Autre"
                         },
                         dataType: 'json'
                     })
@@ -65,25 +65,32 @@
         <h1>
             Inscription
         </h1>
-        Adresse mail : <input class="input_field" name="email" type="text" id="mail" value="" />
+        <p>Adresse mail :</p>
+        <input class="input_field" name="email" type="text" id="mail" value="" />
 
-        Mot de passe : <input class="input_field" name="password" type="password" id="password" value="" />
+        <p>Mot de passe :</p>
+        <input class="input_field" name="password" type="password" id="password" value="" />
 
-        Confirmation du mot de passe : <input class="input_field" name="cpassword" type="password" id="cpassword"
-            value="" />
+        <p>Confirmation du mot de passe :</p>
+        <input class="input_field" name="cpassword" type="password" id="cpassword" value="" />
 
-        Nom : <input class="input_field" name="lastname" type="text" id="lastname" value="" />
+        <p>Nom :</p>
+        <input class="input_field" name="lastname" type="text" id="lastname" value="" />
 
-        Prénom : <input class="input_field" name="firstname" type="text" id="firstname" value="" />
+        <p>Prénom :</p>
+        <input class="input_field" name="firstname" type="text" id="firstname" value="" />
 
-        Téléphone : <input class="input_field" name="phone" type="text" id="phone" value="" />
+        <p>Téléphone :</p>
+        <input class="input_field" name="phone" type="text" id="phone" value="" />
 
-        Adresse : <input class="input_field" name="address" type="text" id="address" value="" />
+        <p>Adresse :</p>
+        <input class="input_field" name="address" type="text" id="address" value="" />
 
-        Date de naissance : <input class="input_field" type="date" id="birthdate" name="birthdate">
+        <p>Date de naissance :</p>
+        <input class="input_field" type="date" id="birthdate" name="birthdate">
+
         <div id="genders">
-            Genre :
-
+            <p>Genre :</p>
             <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
             <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
             <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
@@ -93,7 +100,7 @@
         <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
         <div>
             <a href="login.html">
-                J'ai déja un compte
+                <p>J'ai déja un compte</p>
             </a>
         </div>
 

@@ -21,11 +21,14 @@ public class EmployeeDistributionAction extends Action {
             Client client = (Client) service.findIndividuById(id);
             if (client != null) {
                 List<Pair<Employe, Integer>> distribution = service.getRepartitionParEmp(client);
+                request.setAttribute("client", client);
                 request.setAttribute("distribution", distribution);
             } else {
+                request.setAttribute("client", null);
                 request.setAttribute("distribution", null);
             }
         } catch (Exception e) {
+            request.setAttribute("client", null);
             request.setAttribute("distribution", null);
         }
     }

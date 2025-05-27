@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="style/diagram.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
@@ -34,14 +35,44 @@
                             type: 'POST',
                             data: {
                                 todo: 'employee_distribution',
+                                clientId: clientId
                             },
                             dataType: 'json'
                         })
                             .done(function (response) {
+                                if (response.distribution != null && response.distribution.length > 0) {
+                                    google.charts.load('current', { 'packages': ['corechart'] });
+                                    google.charts.setOnLoadCallback(drawChart);
 
+                                    function drawChart() {
+                                        let array = [['Employé', 'Nombre de fois']];
+                                        response.distribution.forEach(function (item) {
+                                            array.push([item.key.prenom + " " + item.key.nom, item.value]);
+                                        });
+
+                                        var data = google.visualization.arrayToDataTable(array);
+
+                                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                                        chart.draw(data);
+                                    }
+
+                                    $("#loading-content").removeAttr("hidden");
+                                } else {
+                                    $("#loading-empty").attr("hidden", "hidden");
+                                }
+                                if (response.client != null) {
+                                    $("#history-title").text("Historique de " + response.client.prenom + " " + response.client.nom);
+                                } else {
+                                    $("#history-title").text("Historique");
+                                }
+
+                                $("#loading-box").removeClass("loading");
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
                                 console.error("Error during AJAX request: " + textStatus, errorThrown);
+                                $("#loading-error").removeAttr("hidden");
+                                $("#loading-box").removeClass("loading");
                             });
                     }
                 })
@@ -57,7 +88,14 @@
 </head>
 
 <body>
-    <h1 id="history-title"></h1>
+    <div id="loading-box" class="loading">
+        <p id="loading-error" hidden>Erreur lors du chargement de l'historique.</p>
+        <p id="loading-empty" hidden>Historique vide.</p>
+        <div id="loading-content" hidden>
+            <h1 id="history-title">Historique</h1>
+            <div id="piechart"></div>
+        </div>
+    </div>
     <input type="button" id="back" value="Retour" />
 </body>
 

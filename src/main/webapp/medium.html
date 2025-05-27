@@ -83,6 +83,9 @@
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("Error during AJAX request: " + textStatus, errorThrown);
                 })
+            $("#back-button").on("click", function () {
+                window.location = "index.html";
+            });
         });
     </script>
 </head>
@@ -103,7 +106,7 @@
                 <img id="medium-image" src="images/medium.png" alt="Medium" />
                 <p id="name"></p>
             </div>
-            <p id="description"></p>  
+            <p id="description"></p>
         </div>
         <p id="type"></p>
         <ul>

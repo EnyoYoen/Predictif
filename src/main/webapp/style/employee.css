@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    margin: 0px 0px;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -10,6 +10,8 @@ body {
 #content {
     display: flex;
     flex-direction: row;
+    padding: 0px 10px;
+    gap: 10px;
 }
 
 #header-container {
@@ -23,10 +25,47 @@ body {
 }
 
 #consultation-space {
-    text-align: center;
     width: 50%;
     display: flex;
     flex-direction: column;
+    text-align: center;
+}
+
+#next-consultation {
+    background-color: #e2e2e2;
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+#consultation-astral {
+    margin: 0;
+}
+
+#consultation-predictions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio_buttons {
+    padding: 7px 5px;
+    margin: 8px 8px;
+}
+
+#predictions-content {
+    background-color: #e2e2e2;
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: justify;
+}
+
+.amplify {
+    font-weight: bold;
+    color: #29292e;
 }
 
 #stats {
@@ -36,22 +75,24 @@ body {
     flex-direction: column;
 }
 
-.input_field {
-    width: 20%;
-    padding: 7px 5px;
-    margin: 8px 0px;
-    align-self: center;
-}
-
-.radio_buttons {
-    padding: 7px 5px;
-    margin: 8px 8px;
-}
-
 #commentary {
     padding: 7px 5px;
     margin: 8px 0px;
     width: 40%
+}
+
+#search-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.input_field {
+    padding: 7px 5px;
+    margin: 8px 0px;
+    align-self: center;
 }
 
 #ready-buttons {
@@ -63,4 +104,58 @@ body {
     width: 45%;
     padding: 7px 5px;
     margin: 0 2.5%;
+}
+
+#medium-list,
+#search-results {
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+}
+
+.medium-template,
+.client-template {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e2e2e2;
+    border-radius: 16px;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.medium-template:hover {
+    background-color: #d0d0d0;
+}
+
+.medium-image-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-picture {
+    width: 64px;
+    height: 64px;
+    border-radius: 25%;
+    border: 1px solid #000000;
+    margin-right: 10px;
+}
+
+.client-full-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
 }
