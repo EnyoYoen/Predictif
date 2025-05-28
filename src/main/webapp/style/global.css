@@ -133,3 +133,9 @@ input {
     padding: 0 8px 0 8px;
     background-color: rgb(190, 190, 190);
 }
+
+.input-field {
+    padding: 7px 5px;
+    margin: 8px 0px;
+    align-self: center;
+}

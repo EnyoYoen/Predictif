@@ -63,10 +63,10 @@
                                     listeAstral.append("<li>Couleur porte bonheur : " + client.profilAstral.couleur + "</li>");
                                     listeAstral.append("<li>Animal totem : " + client.profilAstral.animal + "</li>");
 
-                                    $("#mediumName").text("Medium à incarner : " + medium.denomination);
+                                    $("#medium-name").text("Medium à incarner : " + medium.denomination);
 
 
-                                    $("#clientHistory").on("click", function () {
+                                    $("#client-history").on("click", function () {
                                         window.location = "client-history-employee.html?clientId=" + client.id;
                                     });
 
@@ -141,7 +141,7 @@
                                         $("#predictions-content").removeAttr("hidden");
                                     })
                                     .fail(function (jqXHR, textStatus, errorThrown) {
-                                        console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                        console.error("Error during AJAX request: " + textStatus, errorThrown);
                                         $("#predictions").removeClass("loading");
                                         $("#predictions-error").removeAttr("hidden");
                                     });
@@ -168,7 +168,7 @@
                                     }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
-                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                                 });
                         });
                         $("#end").on("click", function () {
@@ -196,7 +196,7 @@
                                     }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
-                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                                 });
                         });
                         $("#see-more").on("click", function () {
@@ -230,7 +230,7 @@
                                     }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
-                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                                     $("#top-mediums-loading-box").removeClass("loading");
                                     $("#top-mediums-error").removeAttr("hidden");
                                 });
@@ -268,7 +268,7 @@
                                     }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
-                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                                     $("#search-loading-box").removeClass("loading");
                                     $("#search-error").removeAttr("hidden");
                                 });
@@ -294,13 +294,13 @@
                                     }
                                 })
                                 .fail(function (jqXHR, textStatus, errorThrown) {
-                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                                 });
                         });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
         });
     </script>
@@ -329,9 +329,9 @@
 
                             </ul>
                         </div>
-                        <p id="mediumName"></p>
+                        <p id="medium-name"></p>
 
-                        <input class="input_field" name="clientHistory" type="button" id="clientHistory"
+                        <input class="input-field" name="client-history" type="button" id="client-history"
                             value="Consulter l'historique du client" />
 
                         <table id="consultation-predictions">
@@ -373,7 +373,7 @@
                             </tr>
                         </table>
 
-                        <input class="input_field" name="predictionGenerator" type="button" id="predGen"
+                        <input class="input-field" name="predictionGenerator" type="button" id="predGen"
                             value="Generer les predictions" />
 
                         <div id="predictions">
@@ -402,16 +402,16 @@
                     <div id="top-mediums-content" hidden>
                         <ul id="medium-list">
                         </ul>
-                        <input class="input_field" name="Voir plus" type="button" id="see-more" value="Voir plus" />
+                        <input class="input-field" name="Voir plus" type="button" id="see-more" value="Voir plus" />
                     </div>
                 </div>
 
                 <h3>Répartition des clients par employé</h3>
                 <div id="search-box">
                     <p>Rechercher par nom :</p>
-                    <input class="input_field" type="text" id="search" />
+                    <input class="input-field" type="text" id="search" />
                 </div>
-                <input class="input_field" name="search" type="button" id="searchButton" value="Rechercher" />
+                <input class="input-field" name="search" type="button" id="searchButton" value="Rechercher" />
 
                 <div id="search-loading-box">
                     <p id="search-error" hidden>Erreur lors de la recherche.</p>

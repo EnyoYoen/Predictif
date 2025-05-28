@@ -29,7 +29,7 @@
             })
                 .done(function (response) {
                     if (response == null || response.connected == null || response.connected == false || response.type != "employee") {
-                        window.location = "index.html";
+                        window.location = "employee.html";
                     } else {
                         $.ajax({
                             url: './ActionServlet',

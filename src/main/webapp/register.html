@@ -39,17 +39,17 @@
                                 window.location = "success.html";
                             }
                             else {
-                                $("#fill_fields").text("Erreur d'inscription");
+                                $("#fill-fields").text("Erreur d'inscription");
                             }
                         })
                         .fail(function (error) {
                             $("#signin").text("ERREUR");
-                            $("#fill_fields").text("Erreur d'inscription");
+                            $("#fill-fields").text("Erreur d'inscription");
                             console.error("Error during AJAX request: " + textStatus, errorThrown);
                         });
                 }
                 else {
-                    $("#fill_fields").text("Remplir tous les champs");
+                    $("#fill-fields").text("Remplir tous les champs");
                 }
 
             });
@@ -69,28 +69,28 @@
                 Inscription
             </h1>
             <p>Adresse mail :</p>
-            <input class="input_field" name="email" type="text" id="mail" value="" />
+            <input class="input-field" name="email" type="text" id="mail" value="" />
 
             <p>Mot de passe :</p>
-            <input class="input_field" name="password" type="password" id="password" value="" />
+            <input class="input-field" name="password" type="password" id="password" value="" />
 
             <p>Confirmation du mot de passe :</p>
-            <input class="input_field" name="cpassword" type="password" id="cpassword" value="" />
+            <input class="input-field" name="cpassword" type="password" id="cpassword" value="" />
 
             <p>Nom :</p>
-            <input class="input_field" name="lastname" type="text" id="lastname" value="" />
+            <input class="input-field" name="lastname" type="text" id="lastname" value="" />
 
             <p>Prénom :</p>
-            <input class="input_field" name="firstname" type="text" id="firstname" value="" />
+            <input class="input-field" name="firstname" type="text" id="firstname" value="" />
 
             <p>Téléphone :</p>
-            <input class="input_field" name="phone" type="text" id="phone" value="" />
+            <input class="input-field" name="phone" type="text" id="phone" value="" />
 
             <p>Adresse :</p>
-            <input class="input_field" name="address" type="text" id="address" value="" />
+            <input class="input-field" name="address" type="text" id="address" value="" />
 
             <p>Date de naissance :</p>
-            <input class="input_field" type="date" id="birthdate" name="birthdate">
+            <input class="input-field" type="date" id="birthdate" name="birthdate">
 
             <div id="genders">
                 <p>Genre :</p>
@@ -99,8 +99,8 @@
                 <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
             </div>
 
-            <span id="fill_fields" style="color: red"></span>
-            <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
+            <span id="fill-fields" style="color: red"></span>
+            <input class="input-field" name="signin" type="button" id="signin" value="Inscription" />
             <div>
                 <a href="login.html">
                     <p>J'ai déja un compte</p>
