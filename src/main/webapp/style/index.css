@@ -1,7 +1,3 @@
-#content {
-    flex: 1;
-}
-
 #title-container {
     padding: 0;
     margin: 10px 0 0 0;
@@ -53,12 +49,6 @@
     box-sizing: border-box;
 }
 
-#footer-container {
-    display: flex;
-    flex-direction: row;
-    font-size: small;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px 0 8px;
-    background-color: rgb(190, 190, 190);
+.medium-template:hover {
+    background-color: #e0e0e0;
 }

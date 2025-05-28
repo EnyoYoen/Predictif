@@ -63,50 +63,59 @@
             <a href="index.html">Retour accueil</a>
         </div>
     </header>
-    <div id="inscription">
-        <h1>
-            Inscription
-        </h1>
-        <p>Adresse mail :</p>
-        <input class="input_field" name="email" type="text" id="mail" value="" />
+    <div id="content">
+        <div id="inscription">
+            <h1>
+                Inscription
+            </h1>
+            <p>Adresse mail :</p>
+            <input class="input_field" name="email" type="text" id="mail" value="" />
 
-        <p>Mot de passe :</p>
-        <input class="input_field" name="password" type="password" id="password" value="" />
+            <p>Mot de passe :</p>
+            <input class="input_field" name="password" type="password" id="password" value="" />
 
-        <p>Confirmation du mot de passe :</p>
-        <input class="input_field" name="cpassword" type="password" id="cpassword" value="" />
+            <p>Confirmation du mot de passe :</p>
+            <input class="input_field" name="cpassword" type="password" id="cpassword" value="" />
 
-        <p>Nom :</p>
-        <input class="input_field" name="lastname" type="text" id="lastname" value="" />
+            <p>Nom :</p>
+            <input class="input_field" name="lastname" type="text" id="lastname" value="" />
 
-        <p>Prénom :</p>
-        <input class="input_field" name="firstname" type="text" id="firstname" value="" />
+            <p>Prénom :</p>
+            <input class="input_field" name="firstname" type="text" id="firstname" value="" />
 
-        <p>Téléphone :</p>
-        <input class="input_field" name="phone" type="text" id="phone" value="" />
+            <p>Téléphone :</p>
+            <input class="input_field" name="phone" type="text" id="phone" value="" />
 
-        <p>Adresse :</p>
-        <input class="input_field" name="address" type="text" id="address" value="" />
+            <p>Adresse :</p>
+            <input class="input_field" name="address" type="text" id="address" value="" />
 
-        <p>Date de naissance :</p>
-        <input class="input_field" type="date" id="birthdate" name="birthdate">
+            <p>Date de naissance :</p>
+            <input class="input_field" type="date" id="birthdate" name="birthdate">
 
-        <div id="genders">
-            <p>Genre :</p>
-            <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
-            <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
-            <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
+            <div id="genders">
+                <p>Genre :</p>
+                <input type="radio" id="man" name="gender" value=1 checked><label for="man">Homme</label>
+                <input type="radio" id="woman" name="gender" value=2><label for="woman">Femme</label>
+                <input type="radio" id="other" name="gender" value=3><label for="other">Autre</label>
+            </div>
+
+            <span id="fill_fields" style="color: red"></span>
+            <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
+            <div>
+                <a href="login.html">
+                    <p>J'ai déja un compte</p>
+                </a>
+            </div>
         </div>
-
-        <span id="fill_fields" style="color: red"></span>
-        <input class="input_field" name="signin" type="button" id="signin" value="Inscription" />
-        <div>
-            <a href="login.html">
-                <p>J'ai déja un compte</p>
-            </a>
-        </div>
-
     </div>
+
+    <footer>
+        <div id="footer-container">
+            <p>© 2025 Predict'IF</p>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Conditions générales de ventes</a>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Politique de confidentialité</a>
+        </div>
+    </footer>
 </body>
 
 </html>

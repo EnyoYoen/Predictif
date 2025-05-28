@@ -38,13 +38,13 @@ public class RegisterAction extends Action {
         Date date = null;
         try {
             if (birthdate == null || birthdate.isEmpty()) {
-                request.setAttribute("client", null);
+                request.setAttribute("success", false);
                 return;
             } else {
                 date = format.parse(birthdate);
             }
         } catch (ParseException ex) {
-            request.setAttribute("client", null);
+            request.setAttribute("success", false);
             return;
         }
 
@@ -55,10 +55,6 @@ public class RegisterAction extends Action {
             return;
         } else {
             request.setAttribute("success", true);
-        }
-        if (client != null) {
-            request.getSession().setAttribute("id", client.getId());
-            request.getSession().setAttribute("type", "client");
         }
     }
 }

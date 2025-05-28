@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            let connected = false;
+            let templatesClickable = false;
             params = new URLSearchParams(window.location.search);
             if (params.has("appointment")) {
                 if (params.get("appointment") == "true") {
@@ -54,6 +56,12 @@
                         $("#login").hide();
                         $("#history").show();
                         connected = true;
+
+                        if (!templatesClickable) {
+                            $(".medium-template").on("click", function () {
+                                window.location = "medium.html?mediumId=" + $(this).attr("id");
+                            });
+                        }
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
@@ -72,9 +80,12 @@
                     listeMediums.empty();
                     for (const medium of liste) {
                         listeMediums.append("<div id=" + medium.id + " class=\"medium-template\"><p>" + medium.denomination + "</p><p>" + medium.description + "<p></div>");
-                        $("#" + medium.id).on("click", function () {
-                            window.location = "medium.html?mediumId=" + medium.id;
-                        });
+                        if (connected) {
+                            $("#" + medium.id).on("click", function () {
+                                window.location = "medium.html?mediumId=" + medium.id;
+                            });
+                            templatesClickable = true;
+                        }
                     }
                     if (liste.length == 0) {
                         $("#mediums-empty").removeAttr("hidden");

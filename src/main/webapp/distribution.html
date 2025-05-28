@@ -36,7 +36,7 @@
             // Set the map center to the isobarycenter of the points
             if (points.length > 0) {
                 let sumLat = 0, sumLng = 0;
-                points.forEach(function(point) {
+                points.forEach(function (point) {
                     sumLat += point.lat;
                     sumLng += point.lng;
                 });
@@ -106,20 +106,28 @@
 
     <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQl39F85GBKydbYSzVaIaAQzz4UXLJZ5E&callback=initMap">
-    </script>
+        </script>
 </head>
-<header>
-    <div id="index-text">
-        <a href="employee.html">Retour dashboard</a>
-    </div>
-</header>
 
 <body>
-    <div>
+    <header>
+        <div id="index-text">
+            <a href="employee.html">Retour dashboard</a>
+        </div>
+    </header>
+
+    <div id="content">
         <h1 id="title">Localisation des clients</h1>
         <div id="map"></div>
     </div>
 
+    <footer>
+        <div id="footer-container">
+            <p>© 2025 Predict'IF</p>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Conditions générales de ventes</a>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Politique de confidentialité</a>
+        </div>
+    </footer>
 </body>
 
 </html>

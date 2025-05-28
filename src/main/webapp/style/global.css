@@ -114,3 +114,17 @@ input {
 .sbutton:hover {
     background-color: #e6e6e6;
 }
+
+#content {
+    flex: 1;
+}
+
+#footer-container {
+    display: flex;
+    flex-direction: row;
+    font-size: small;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px 0 8px;
+    background-color: rgb(190, 190, 190);
+}
