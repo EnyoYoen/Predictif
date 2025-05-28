@@ -50,11 +50,12 @@
                     } else if (response.connected == false) {
                         $("#signin").show();
                         $("#login").show();
-                        $("#history").hide();
+                        $("#history-link").hide();
                     } else if (response.connected == true) {
                         $("#signin").hide();
                         $("#login").hide();
-                        $("#history").show();
+                        $("#history-link").show();
+                        $("#disconnect").removeAttr("hidden");
                         connected = true;
 
                         if (!templatesClickable) {
@@ -62,6 +63,28 @@
                                 window.location = "medium.html?mediumId=" + $(this).attr("id");
                             });
                         }
+
+                        $("#disconnect").on("click", function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'disconnect',
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        window.location = "index.html";
+                                    }
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
@@ -105,12 +128,15 @@
 
 <body>
     <header>
-        <div id="history-header">
-            <a href="client-history.html">Historique</a>
+        <div>
+            <a id="history-link" href="client-history.html" hidden>Historique</a>
         </div>
         <div id="header-buttons">
             <input name="Inscription" type="button" id="signin" value="Inscription" />
             <input name="Connexion" type="button" id="login" value="Connexion" />
+        </div>
+        <div id="disconnect" hidden>
+            <a href="index.html">Déconnexion</a>
         </div>
     </header>
 

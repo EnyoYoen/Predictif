@@ -276,6 +276,27 @@
                         $("#map").on("click", function () {
                             window.location = "distribution.html";
                         });
+                        $("#disconnect").on("click", function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                url: './ActionServlet',
+                                type: 'POST',
+                                data: {
+                                    todo: 'disconnect',
+                                },
+                                dataType: 'json'
+                            })
+                                .done(function (response) {
+                                    if (response.error) {
+                                        alert("Erreur : " + response.error);
+                                    } else {
+                                        window.location = "index.html";
+                                    }
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    console.error("Erreur lors de la requête AJAX : " + textStatus, errorThrown);
+                                });
+                        });
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
@@ -287,8 +308,8 @@
 
 <body>
     <header>
-        <div>
-            <a href="index.html">Déconnexion</a>
+        <div id="disconnect">
+            <a href="index.html" class="disabled-link">Déconnexion</a>
         </div>
     </header>
     <div id="content">

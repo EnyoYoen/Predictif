@@ -28,6 +28,11 @@ header {
     margin-bottom: 10px;
 }
 
+.disabled-link {
+    pointer-events: none;
+    cursor: pointer;
+}
+
 #title,
 h1 {
     font-family: Mistic;

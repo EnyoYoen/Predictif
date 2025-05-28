@@ -18,6 +18,7 @@ import web.model.ClientHistoryAction;
 import web.model.ClientListSearchAction;
 import web.model.ConnectedAction;
 import web.model.CurrentConsultationAction;
+import web.model.DisconnectAction;
 import web.model.EmployeeDistributionAction;
 import web.model.EndConsultationAction;
 import web.model.LoginAction;
@@ -121,6 +122,10 @@ public class ActionServlet extends HttpServlet {
             case "register":
                 new RegisterAction(service).execute(req);
                 new RegisterSerialisation().apply(req, res);
+                break;
+            case "disconnect":
+                new DisconnectAction(service).execute(req);
+                new ErrorSerialisation().apply(req, res);
                 break;
             default:
                 break;
