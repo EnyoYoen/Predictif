@@ -1,5 +1,16 @@
 #history-title {
+    align-items: center;
     text-align: center;
+}
+
+#history-list li {
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+#history-list a {
+    display: inline-block;
+    margin-left: 1em;
 }
 
 .input-field {
