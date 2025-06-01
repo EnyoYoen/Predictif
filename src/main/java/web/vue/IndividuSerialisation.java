@@ -16,8 +16,8 @@ import metier.modele.Individu;
  *
  * @author ypeyrot
  */
-public class IndividuSerialisation {
-
+public class IndividuSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

@@ -11,8 +11,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class EmployeeDistributionSerialisation {
-
+public class EmployeeDistributionSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

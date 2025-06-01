@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ClientDistributionSerialisation {
+public class ClientDistributionSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

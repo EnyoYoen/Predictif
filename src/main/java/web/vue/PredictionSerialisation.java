@@ -23,8 +23,8 @@ import metier.modele.Spirite;
  *
  * @author ypeyrot
  */
-public class PredictionSerialisation {
-
+public class PredictionSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

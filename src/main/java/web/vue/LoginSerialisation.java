@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ypeyrot
  */
-public class LoginSerialisation {
-
+public class LoginSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {
