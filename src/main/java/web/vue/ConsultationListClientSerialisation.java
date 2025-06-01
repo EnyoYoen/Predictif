@@ -27,7 +27,6 @@ public class ConsultationListClientSerialisation {
         response.setContentType("application/json;charset=UTF-8");
 
         List<Consultation> consultations = (List<Consultation>) request.getAttribute("consultationList");
-        Client client = (Client) request.getAttribute("client");
 
         Map<String, Object> data = new HashMap<>();
         data.put("consultationList", consultations);
@@ -37,7 +36,10 @@ public class ConsultationListClientSerialisation {
         builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("mdp");
+                return f.getName().equals("mdp") || (f.getDeclaringClass() == Consultation.class && (
+                   f.getName().equals("client") ||
+                   f.getName().equals("employe")
+               ));
             }
 
             @Override
