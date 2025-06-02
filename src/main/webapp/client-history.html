@@ -40,17 +40,19 @@
                         })
                             .done(function (response) {
                                 $("#history-list").empty();
-                                for (let i = 0; i < response.length; i++) {
-                                    const consultation = response[i];
+                                const consultations = response.consultationList;
+                                for (let i = 0; i < consultations.length; i++) {
+                                    const consultation = consultations[i];
+                                    // Extract only the date part (YYYY-MM-DD)
+                                    const day = consultation.date ? consultation.date.split('T')[0] : '';
                                     const listItem = $("<li></li>");
-                                    listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>" + consultation.medium.DType + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
+                                    listItem.html("<p>" + consultation.medium.denomination + " - " + day + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
                                     $("#history-list").append(listItem);
                                 }
                             })
                             .fail(function (jqXHR, textStatus, errorThrown) {
                                 console.error("Error during AJAX request: " + textStatus, errorThrown);
                             });
-                        // commit yest
                     }
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
