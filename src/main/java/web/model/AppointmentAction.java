@@ -25,7 +25,6 @@ public class AppointmentAction extends Action {
             Client client = (Client)service.findIndividuById(clientId);
             Medium medium = service.findMediumById(idm);
             if (client == null || medium == null) {
-                printlnConsoleIHM("erreur db");
                 request.setAttribute("error", true);
                 request.setAttribute("available", null);
             } else {
@@ -34,6 +33,8 @@ public class AppointmentAction extends Action {
                 request.setAttribute("available", employe != null);
             }
         } catch (Exception e) {
+            request.setAttribute("error", true);
+            request.setAttribute("available", null);
         }
     }
 }

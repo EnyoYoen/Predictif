@@ -34,14 +34,15 @@ public class ClientHistoryAction extends Action {
             } else {
                 id = Long.parseLong(clientId);
             }
-            request.setAttribute("consultationList", null);
             Client client = (Client)service.findIndividuById(id);
             List<Consultation> consultations = service.getHistoriqueClient(client);
             request.setAttribute("consultationList", consultations);
             request.setAttribute("client", client);
+            System.out.println("Client history loaded for client ID: " + id);
         } catch (NumberFormatException e) {
             request.setAttribute("consultationList", null);
             request.setAttribute("client", null);
+            System.err.println("Invalid client ID format: " + e.getMessage());
         }
     }
 }

@@ -32,7 +32,7 @@ body {
 }
 
 #next-consultation {
-    background-color: #e2e2e2;
+    background-color: rgb(234, 216, 189);
     margin: 10px 0px;
     padding: 10px;
     border-radius: 8px;
@@ -103,6 +103,7 @@ body {
 
 #medium-list,
 #search-results {
+    background-color: tan;
     padding: 0;
     margin: 10px 0;
     display: flex;
@@ -123,6 +124,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #e2e2e2;
+    opacity: 0.8;
     border-radius: 16px;
     padding: 10px;
     padding-right: 20px;

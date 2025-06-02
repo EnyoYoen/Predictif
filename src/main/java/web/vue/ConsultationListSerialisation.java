@@ -28,10 +28,10 @@ public class ConsultationListSerialisation extends Serialisation {
         response.setContentType("application/json;charset=UTF-8");
 
         List<Consultation> consultations = (List<Consultation>) request.getAttribute("consultationList");
-        // Client client = (Client) request.getAttribute("client");
+        Client client = (Client) request.getAttribute("client");
 
         Map<String, Object> data = new HashMap<>();
-        // data.put("client", client);
+        data.put("client", client);
         data.put("consultationList", consultations);
 
         GsonBuilder builder = new GsonBuilder();
