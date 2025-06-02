@@ -92,6 +92,7 @@ body {
 #ready-buttons {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .ready-check {

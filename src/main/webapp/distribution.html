@@ -77,7 +77,7 @@
                             dataType: 'json'
                         })
                             .done(function (response) {
-                                if (map != null) {
+                                if (map != null && response != null && response.length > 0) {
                                     points = response;
                                     addPointsToMap(points);
                                 }

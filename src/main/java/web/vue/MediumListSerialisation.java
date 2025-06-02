@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ypeyrot
  */
-public class MediumListSerialisation {
-
+public class MediumListSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

@@ -41,6 +41,10 @@
                             dataType: 'json'
                         })
                             .done(function (response) {
+                                if (response == null || response.client == null) {
+                                    $("#history-title").text("Aucun historique trouvé");
+                                    return;
+                                }
                                 $("#history-title").text("Historique de " + response.client.prenom + " " + response.client.nom);
                                 $("#history-list").empty();
                                 for (let i = 0; i < response.consultationList.length; i++) {

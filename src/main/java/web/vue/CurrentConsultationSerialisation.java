@@ -25,8 +25,8 @@ import metier.modele.Spirite;
  *
  * @author ypeyrot
  */
-public class CurrentConsultationSerialisation {
-
+public class CurrentConsultationSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {

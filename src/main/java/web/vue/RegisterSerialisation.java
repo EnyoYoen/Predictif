@@ -21,8 +21,8 @@ import metier.modele.Client;
  *
  * @author ypeyrot
  */
-public class RegisterSerialisation{
-
+public class RegisterSerialisation extends Serialisation {
+    @Override
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {
