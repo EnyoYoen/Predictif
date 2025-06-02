@@ -43,8 +43,15 @@
                                 const consultations = response.consultationList;
                                 for (let i = 0; i < consultations.length; i++) {
                                     const consultation = consultations[i];
-                                    // Extract only the date part (YYYY-MM-DD)
-                                    const day = consultation.date ? consultation.date.split('T')[0] : '';
+                                    let day = '';
+                                    if (consultation.date) {
+                                        // Parse the localized date string
+                                        const dateObj = new Date(consultation.date);
+                                        // Format as YYYY-MM-DD
+                                        day = dateObj.getFullYear() + '-' +
+                                            String(dateObj.getMonth() + 1).padStart(2, '0') + '-' +
+                                            String(dateObj.getDate()).padStart(2, '0');
+                                    }
                                     const listItem = $("<li></li>");
                                     listItem.html("<p>" + consultation.medium.denomination + " - " + day + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
                                     $("#history-list").append(listItem);

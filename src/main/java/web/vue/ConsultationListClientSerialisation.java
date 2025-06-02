@@ -16,8 +16,7 @@ import java.util.Map;
 import metier.modele.Client;
 import metier.modele.Consultation;
 
-public class ConsultationListSerialisation extends Serialisation {
-    @Override
+public class ConsultationListClientSerialisation {
     public void apply(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out;
         try {
@@ -28,10 +27,8 @@ public class ConsultationListSerialisation extends Serialisation {
         response.setContentType("application/json;charset=UTF-8");
 
         List<Consultation> consultations = (List<Consultation>) request.getAttribute("consultationList");
-        // Client client = (Client) request.getAttribute("client");
 
         Map<String, Object> data = new HashMap<>();
-        // data.put("client", client);
         data.put("consultationList", consultations);
 
         GsonBuilder builder = new GsonBuilder();
@@ -39,11 +36,10 @@ public class ConsultationListSerialisation extends Serialisation {
         builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("adresse") || f.getName().equals("numeroTel")
-                    || f.getName().equals("mail") || f.getName().equals("genre")
-                    || f.getName().equals("mdp") || f.getName().equals("historique")
-                    || f.getName().equals("dateNaissance") || f.getName().equals("profilAstral")
-                    || f.getName().equals("consultationEnCours");
+                return f.getName().equals("mdp") || (f.getDeclaringClass() == Consultation.class && (
+                   f.getName().equals("client") ||
+                   f.getName().equals("employe")
+               ));
             }
 
             @Override

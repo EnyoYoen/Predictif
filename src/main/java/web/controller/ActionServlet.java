@@ -32,6 +32,7 @@ import web.model.TopMediumAction;
 import web.vue.AppointmentSerialisation;
 import web.vue.ClientDistributionSerialisation;
 import web.vue.ClientListSerialisation;
+import web.vue.ConsultationListClientSerialisation;
 import web.vue.ConsultationListSerialisation;
 import web.vue.CurrentConsultationSerialisation;
 import web.vue.EmployeeDistributionSerialisation;
