@@ -1,102 +1,102 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" />
-        <meta charset="UTF-8" />
-        <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8" />
+    <meta name="author" content="Timothée Lafon de la Laurencie / Yoen Peyrot" />
 
-        <title>Predict'IF - Historique</title>
+    <title>Predict'IF - Historique</title>
 
-        <link rel="stylesheet" type="text/css" href="style/global.css" />
-        <link rel="stylesheet" type="text/css" href="style/client-history.css" />
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/client-history.css" />
 
-        <link rel="icon" type="image/png" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    type: 'POST',
-                    data: {
-                        todo: 'connected',
-                    },
-                    dataType: 'json'
-                })
-                        .done(function (response) {
-                            if (response == null || response.connected == null || response.connected == false) {
-                                window.location = "index.html";
-                            } else if (response.connected == true && response.type == "employee") {
-                                window.location = "employee.html";
-                            } else {
-                                $.ajax({
-                                    url: './ActionServlet',
-                                    type: 'POST',
-                                    data: {
-                                        todo: 'client_history',
-                                    },
-                                    dataType: 'json'
-                                })
-                                        .done(function (response) {
-                                            $("#history-list").empty();
-                                            const consultations = response.consultationList;
-                                            for (let i = 0; i < consultations.length; i++) {
-                                                const consultation = consultations[i];
-                                                let day = '';
-                                                if (consultation.date) {
-                                                    // Parse the localized date string
-                                                    const dateObj = new Date(consultation.date);
-                                                    // Format as YYYY-MM-DD
-                                                    day = dateObj.getFullYear() + '-' +
-                                                            String(dateObj.getMonth() + 1).padStart(2, '0') + '-' +
-                                                            String(dateObj.getDate()).padStart(2, '0');
-                                                }
-                                                const listItem = $("<li></li>");
-                                                listItem.html("<p>" + consultation.medium.denomination + " - " + day + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
-                                                $("#history-list").append(listItem);
-                                            }
-                                        })
-                                        .fail(function (jqXHR, textStatus, errorThrown) {
-                                            console.error("Error during AJAX request: " + textStatus, errorThrown);
-                                        });
-                            }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: './ActionServlet',
+                type: 'POST',
+                data: {
+                    todo: 'connected',
+                },
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    if (response == null || response.connected == null || response.connected == false) {
+                        window.location = "index.html";
+                    } else if (response.connected == true && response.type == "employee") {
+                        window.location = "employee.html";
+                    } else {
+                        $.ajax({
+                            url: './ActionServlet',
+                            type: 'POST',
+                            data: {
+                                todo: 'client_history',
+                            },
+                            dataType: 'json'
                         })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                            console.error("Error during AJAX request: " + textStatus, errorThrown);
-                        });
-
-                $("#back").on("click", function () {
-                    window.location = "index.html";
+                            .done(function (response) {
+                                $("#history-list").empty();
+                                const consultations = response.consultationList;
+                                for (let i = 0; i < consultations.length; i++) {
+                                    const consultation = consultations[i];
+                                    let day = '';
+                                    if (consultation.date) {
+                                        // Parse the localized date string
+                                        const dateObj = new Date(consultation.date);
+                                        // Format as YYYY-MM-DD
+                                        day = dateObj.getFullYear() + '-' +
+                                            String(dateObj.getMonth() + 1).padStart(2, '0') + '-' +
+                                            String(dateObj.getDate()).padStart(2, '0');
+                                    }
+                                    const listItem = $("<li></li>");
+                                    listItem.html("<p>" + consultation.medium.denomination + " - " + day + "</p><a href='medium.html?mediumId=" + consultation.medium.id + "'>Reprendre RDV</a>");
+                                    $("#history-list").append(listItem);
+                                }
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request: " + textStatus, errorThrown);
+                            });
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Error during AJAX request: " + textStatus, errorThrown);
                 });
+
+            $("#back").on("click", function () {
+                window.location = "index.html";
             });
-        </script>
-    </head>
+        });
+    </script>
+</head>
 
-    <body>
-        <header>
-            <div id="index-text">
-                <a href="index.html">Retour accueil</a>
-            </div>
-        </header>
-
-        <div id="content">
-            <div id="history-title">
-                <h1>Historique des consultations</h1>
-                <ul id="history-list">
-
-                </ul>
-            </div>
+<body>
+    <header>
+        <div id="index-text">
+            <a href="index.html">Retour accueil</a>
         </div>
+    </header>
 
-        <footer>
-            <div id="footer-container">
-                <p>© 2025 Predict'IF</p>
-                <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Conditions générales de ventes</a>
-                <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Politique de confidentialité</a>
-            </div>
-        </footer>
+    <div id="content">
+        <div id="history-title">
+            <h1>Historique des consultations</h1>
+            <ul id="history-list">
 
-    </body>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer-container">
+            <p>© 2025 Predict'IF</p>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Conditions générales de ventes</a>
+            <a href="https://www.youtube.com/watch?v=XfELJU1mRMg">Politique de confidentialité</a>
+        </div>
+    </footer>
+
+</body>
 
 </html>

@@ -11,13 +11,22 @@
     width: 20%;
 }
 
+.button {
+    width: 20%;
+    background-color: tan;
+}
+
 #genders {
     padding: 7px 5px;
     margin: 8px 0px;
 }
 
 #inscription {
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: rgb(234, 216, 189);
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
 }
