@@ -44,7 +44,7 @@
                                 dataType: 'json'
                             })
                                 .done(function (response) {
-                                    if (response.available) {
+                                    if (response.available == true) {
                                         window.location = "index.html?appointment=true";
                                     } else {
                                         window.location = "index.html?appointment=false";

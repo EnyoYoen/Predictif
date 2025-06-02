@@ -22,6 +22,7 @@ public class ClientHistoryAction extends Action {
         super(service);
     }
 
+    @Override
     public void execute(HttpServletRequest request) {
         String clientId = request.getParameter("clientId");
 
@@ -34,11 +35,13 @@ public class ClientHistoryAction extends Action {
                 id = Long.parseLong(clientId);
             }
             request.setAttribute("consultationList", null);
-            // SERVICE NOT IMPLEMENTED BY THE PREVIOUS GROUP??
-            // List<Consultation> consultations = service.getHistoriqueClient(client);
-            // request.setAttribute("consultationList", consultations);
+            Client client = (Client)service.findIndividuById(id);
+            List<Consultation> consultations = service.getHistoriqueClient(client);
+            request.setAttribute("consultationList", consultations);
+            request.setAttribute("client", client);
         } catch (NumberFormatException e) {
             request.setAttribute("consultationList", null);
+            request.setAttribute("client", null);
         }
     }
 }

@@ -20,7 +20,7 @@
             let templatesClickable = false;
             params = new URLSearchParams(window.location.search);
             if (params.has("appointment")) {
-                if (params.get("appointment") == true) {
+                if (params.get("appointment") == "true") {
                     alert("Votre rendez-vous a été pris en compte.");
                 } else {
                     alert("Aucun créneau n'est disponible pour le moment.");

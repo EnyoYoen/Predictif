@@ -38,7 +38,11 @@ public class ConsultationListSerialisation {
         builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().equals("mdp");
+                return f.getName().equals("adresse") || f.getName().equals("numeroTel")
+                    || f.getName().equals("mail") || f.getName().equals("genre")
+                    || f.getName().equals("mdp") || f.getName().equals("historique")
+                    || f.getName().equals("dateNaissance") || f.getName().equals("profilAstral")
+                    || f.getName().equals("consultationEnCours");
             }
 
             @Override

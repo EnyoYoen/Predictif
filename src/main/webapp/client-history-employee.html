@@ -43,10 +43,10 @@
                             .done(function (response) {
                                 $("#history-title").text("Historique de " + response.client.prenom + " " + response.client.nom);
                                 $("#history-list").empty();
-                                for (let i = 0; i < response.length; i++) {
-                                    const consultation = response[i];
+                                for (let i = 0; i < response.consultationList.length; i++) {
+                                    const consultation = response.consultationList[i];
                                     const listItem = $("<li></li>");
-                                    listItem.text("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>Commentaire : " + consultation.commentaire + "</p>");
+                                    listItem.html("<p>" + consultation.medium.denomination + " - " + consultation.date + "</p><p>Commentaire : " + consultation.commentaire + "</p>");
                                     $("#history-list").append(listItem);
                                 }
                             })
